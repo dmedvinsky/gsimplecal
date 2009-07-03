@@ -7,3 +7,9 @@ gsimplecal:	gsimplecal.o
 clean:
 	rm -f *.o *~ gsimplecal
 
+install:
+	cp ./gsimplecal /usr/bin/
+
+remove:
+	rm /usr/bin/gsimplecal
+
