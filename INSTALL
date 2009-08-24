@@ -1,0 +1,25 @@
+INSTALLATION
+
+First you need to install ``libunique`` and ``libunique-dev`` packages.
+After that, just
+
+cd gsimplecal
+make
+sudo make install
+
+Instead of ``sudo make install`` you can copy gsimplecal binary
+whereever you want.
+
+
+UNINSTALLATION
+
+If you used ``sudo make install``, to uninstall the software, run
+
+cd gsimplecal
+sudo make remove
+
+Or you can simply delete ``/usr/bin/gsimplecal`` file.
+
+Otherwise (if you copied the file manually) just delete the binary.
+No files are created while running the programm.
+
