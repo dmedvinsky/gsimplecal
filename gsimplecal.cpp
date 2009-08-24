@@ -45,7 +45,7 @@ void create_main_window()
     gtk_window_set_position(GTK_WINDOW(main_window), GTK_WIN_POS_MOUSE);
 
     gtk_signal_connect(GTK_OBJECT(main_window), "destroy",
-              GTK_SIGNAL_FUNC(destroy), NULL);
+            GTK_SIGNAL_FUNC(destroy), NULL);
 
     // create calendar widget itself
     GtkWidget *calendar;
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
         // if calendar was running, close it, emulating the toggle-switch
         unique_app_send_message(app, UNIQUE_CLOSE, NULL);
     } else {
-        // create a window 
+        // create a window
         create_main_window();
         unique_app_watch_window(app, GTK_WINDOW(main_window));
         // listen for 'close' message from second instance
