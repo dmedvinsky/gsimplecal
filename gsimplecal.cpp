@@ -3,6 +3,7 @@
 
 
 static GtkWidget *main_window = NULL;
+       GtkWidget *calendar = NULL;
 
 
 /**
@@ -25,6 +26,8 @@ static UniqueResponse message_received_cb(UniqueApp *app, UniqueCommand command,
  */
 void destroy(void)
 {
+    gtk_widget_destroy(calendar);
+    gtk_widget_destroy(main_window);
     gtk_main_quit();
 }
 
@@ -48,7 +51,6 @@ void create_main_window()
             GTK_SIGNAL_FUNC(destroy), NULL);
 
     // create calendar widget itself
-    GtkWidget *calendar;
     calendar = gtk_calendar_new();
     gtk_calendar_set_display_options(GTK_CALENDAR(calendar),
             (GtkCalendarDisplayOptions)(GTK_CALENDAR_SHOW_HEADING + GTK_CALENDAR_SHOW_DAY_NAMES));
