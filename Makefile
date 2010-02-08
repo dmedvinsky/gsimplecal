@@ -2,7 +2,7 @@ CC = g++
 CXXFLAGS = -g -Wall `pkg-config --cflags gtk+-2.0 unique-1.0`
 LDFLAGS = `pkg-config --libs gtk+-2.0 unique-1.0`
 
-CHANGESET = `hg tip | grep changeset | sed "s/^.*:\s\+\(.*\):.*/\1/"`
+CHANGESET = `hg tip | grep -m 1 changeset: | sed "s/^.*:\s\+\(.*\):.*/\1/"`
 
 gsimplecal:	gsimplecal.o
 
