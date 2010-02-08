@@ -2,6 +2,8 @@ CC = g++
 CXXFLAGS = -g -Wall `pkg-config --cflags gtk+-2.0 unique-1.0`
 LDFLAGS = `pkg-config --libs gtk+-2.0 unique-1.0`
 
+CHANGESET = `hg tip | grep changeset | sed "s/^.*:\s\+\(.*\):.*/\1/"`
+
 gsimplecal:	gsimplecal.o
 
 clean:
@@ -14,5 +16,5 @@ remove:
 	rm /usr/bin/gsimplecal
 
 tarball:
-	tar -czf ~/gsimplecal.tar.gz --directory .. --exclude=".*" gsimplecal/
+	tar -czf ~/gsimplecal-${CHANGESET}.tar.gz --directory .. --exclude=".*" gsimplecal/
 
