@@ -13,3 +13,6 @@ install:
 remove:
 	rm /usr/bin/gsimplecal
 
+tarball:
+	tar -czf ~/gsimplecal.tar.gz --directory .. --exclude=".*" gsimplecal/
+
