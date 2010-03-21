@@ -6,7 +6,7 @@ PREFIX?=/usr/local
 CHANGESET = `hg tip | grep -m 1 changeset: | sed "s/^.*:\s\+\(.*\):.*/\1/"`
 
 
-gsimplecal:	Boxable.o Calendar.o MainWindow.o gsimplecal.o
+gsimplecal:	Boxable.o Calendar.o Config.o MainWindow.o gsimplecal.o
 
 clean:
 	rm -f *.o *~ gsimplecal

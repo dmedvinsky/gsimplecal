@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
 #include "MainWindow.h"
+#include "Config.h"
 #include "Calendar.h"
 
 
@@ -20,8 +21,13 @@ MainWindow::MainWindow()
     // Create box for child items
     children_box = gtk_vbox_new(false, 10);
 
-    calendar = new Calendar();
-    calendar->addToBox(children_box);
+    Config* config = Config::getInstance();
+
+    calendar = NULL;
+    if (config->show_calendar) {
+        calendar = new Calendar();
+        calendar->addToBox(children_box);
+    }
 
     gtk_container_add(GTK_CONTAINER(widget), children_box);
     gtk_widget_show(children_box);
@@ -30,7 +36,9 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-    delete calendar;
+    if (calendar) {
+        delete calendar;
+    }
     gtk_widget_destroy(children_box);
     gtk_widget_destroy(widget);
 }
