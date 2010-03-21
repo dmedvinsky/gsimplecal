@@ -1,7 +1,7 @@
 INSTALLATION
 
 First you need to install ``libunique`` and ``libunique-dev`` packages.
-You will need gtk2 packages (and their -dev version, it they are
+You will need gtk2 packages (and their -dev version, if they are
 separated in your distro), g++ compiler and pkg-config. Use your package
 manager to install those you are missing too.
 
