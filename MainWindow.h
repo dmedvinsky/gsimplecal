@@ -12,11 +12,12 @@ public:
     MainWindow();
     ~MainWindow();
 
-    GtkWindow* get_window();
+    GtkWindow* getWindow();
 
 protected:
     GtkWidget* widget;
     GtkWidget* children_box;
+
     Calendar* calendar;
 
 };
