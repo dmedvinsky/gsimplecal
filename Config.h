@@ -15,6 +15,7 @@ public:
 
     // options
     bool show_calendar;
+    bool show_timezones;
 
 private:
     static Config* _instance;

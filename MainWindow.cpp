@@ -3,6 +3,7 @@
 #include "MainWindow.h"
 #include "Config.h"
 #include "Calendar.h"
+#include "Timezones.h"
 
 
 MainWindow::MainWindow()
@@ -28,6 +29,12 @@ MainWindow::MainWindow()
         calendar = new Calendar();
         calendar->addToBox(children_box);
     }
+    timezones = NULL;
+    if (config->show_timezones) {
+        timezones = new Timezones();
+        timezones->updateTime();
+        timezones->addToBox(children_box);
+    }
 
     gtk_container_add(GTK_CONTAINER(widget), children_box);
     gtk_widget_show(children_box);
@@ -39,6 +46,9 @@ MainWindow::~MainWindow()
     if (calendar) {
         delete calendar;
     }
+    if (timezones) {
+        delete timezones;
+    }
     gtk_widget_destroy(children_box);
     gtk_widget_destroy(widget);
 }
@@ -46,5 +56,12 @@ MainWindow::~MainWindow()
 GtkWindow* MainWindow::getWindow()
 {
     return GTK_WINDOW(widget);
+}
+
+void MainWindow::updateTime()
+{
+    if (timezones) {
+        timezones->updateTime();
+    }
 }
 
