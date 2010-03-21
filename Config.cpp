@@ -44,6 +44,7 @@ Config::~Config()
 void Config::getDefaults()
 {
     show_calendar = true;
+    show_timezones = false;
 }
 
 bool Config::getFile()
@@ -96,6 +97,10 @@ void Config::addOption(string var, string val)
     if (var == "show_calendar") {
         if (!fromString<bool>(show_calendar, val)) {
             show_calendar = true;
+        }
+    } else if (var == "show_timezones") {
+        if (!fromString<bool>(show_timezones, val)) {
+            show_timezones = false;
         }
     }
 }

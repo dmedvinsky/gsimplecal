@@ -22,10 +22,16 @@ static UniqueResponse message_received_cb(UniqueApp *app, UniqueCommand command,
 }
 
 
-void destroy()
+static void destroy()
 {
     delete main_window;
     gtk_main_quit();
+}
+
+static bool time_handler(GtkWidget *widget)
+{
+    main_window->updateTime();
+    return true;
 }
 
 
@@ -48,6 +54,7 @@ int main(int argc, char *argv[])
                          G_CALLBACK(message_received_cb), NULL);
         gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
                            GTK_SIGNAL_FUNC(destroy), NULL);
+        g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
 
         gtk_main();
     }
