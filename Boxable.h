@@ -7,7 +7,7 @@
 class Boxable
 {
 public:
-    virtual void add_to_box(GtkWidget* box);
+    virtual void addToBox(GtkWidget* box);
 
 protected:
     Boxable() {};

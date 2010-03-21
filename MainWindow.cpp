@@ -21,7 +21,7 @@ MainWindow::MainWindow()
     children_box = gtk_vbox_new(false, 10);
 
     calendar = new Calendar();
-    calendar->add_to_box(children_box);
+    calendar->addToBox(children_box);
 
     gtk_container_add(GTK_CONTAINER(widget), children_box);
     gtk_widget_show(children_box);
@@ -35,7 +35,7 @@ MainWindow::~MainWindow()
     gtk_widget_destroy(widget);
 }
 
-GtkWindow* MainWindow::get_window()
+GtkWindow* MainWindow::getWindow()
 {
     return GTK_WINDOW(widget);
 }

@@ -43,10 +43,10 @@ int main(int argc, char *argv[])
         main_window = new MainWindow();
 
         // connect our window to unique-app messages
-        unique_app_watch_window(app, main_window->get_window());
+        unique_app_watch_window(app, main_window->getWindow());
         g_signal_connect(app, "message-received",
                          G_CALLBACK(message_received_cb), NULL);
-        gtk_signal_connect(GTK_OBJECT(main_window->get_window()), "destroy",
+        gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
                            GTK_SIGNAL_FUNC(destroy), NULL);
 
         gtk_main();
