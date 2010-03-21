@@ -11,8 +11,16 @@ $ cd gsimplecal
 $ make
 $ sudo make install
 
+This will copy compiled binary into /usr/local/bin folder.
+
 Instead of ``sudo make install`` you can copy gsimplecal binary
 whereever you want (somewhere in your $PATH, I guess).
+
+Also you can use PREFIX variable to change the install destination:
+
+$ sudo su
+# PREFIX=/usr make install
+# logout
 
 
 UNINSTALLATION
@@ -22,9 +30,9 @@ If you used ``sudo make install``, to uninstall the software, run
 $ cd gsimplecal
 $ sudo make remove
 
-Or you can simply delete ``/usr/bin/gsimplecal`` file.
+If you used custom prefix, use it here too.
 
-Otherwise (if you copied the file manually), just delete the binary.
+Alternatively, you can simply delete gsimplecal binary file.
 
 No additional files are created while using the program.
 
