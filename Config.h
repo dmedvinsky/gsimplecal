@@ -4,9 +4,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
+typedef struct _ClockInfo
+{
+    string label;
+    string timezone;
+} ClockInfo;
 
 class Config
 {
@@ -16,6 +22,8 @@ public:
     // options
     bool show_calendar;
     bool show_timezones;
+    string clock_format;
+    vector<ClockInfo*> clocks;
 
 private:
     static Config* _instance;

@@ -10,15 +10,22 @@ Timezones::Timezones()
 {
     widget = gtk_vbox_new(false, 0);
 
-    clock = new Clock("Hawaii", ":US/Hawaii");
-    clock->addToBox(widget);
+    Config* config = Config::getInstance();
+    for (unsigned int clock_num = 0; clock_num < config->clocks.size(); clock_num++) {
+        Clock* clock = new Clock(config->clocks[clock_num]->label,
+                                 config->clocks[clock_num]->timezone);
+        clock->addToBox(widget);
+        clocks.push_back(clock);
+    }
 
     gtk_widget_show(widget);
 }
 
 Timezones::~Timezones()
 {
-    delete clock;
+    for (unsigned int clock_num = 0; clock_num < clocks.size(); clock_num++) {
+        delete clocks[clock_num];
+    }
     gtk_widget_destroy(widget);
 }
 
@@ -26,6 +33,8 @@ void Timezones::updateTime()
 {
     struct timeval clock_time;
     gettimeofday(&clock_time, 0);
-    clock->updateTime(clock_time);
+    for (unsigned int clock_num = 0; clock_num < clocks.size(); clock_num++) {
+        clocks[clock_num]->updateTime(clock_time);
+    }
 }
 

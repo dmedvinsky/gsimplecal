@@ -38,6 +38,9 @@ Config::Config()
 
 Config::~Config()
 {
+    for (unsigned int i = 0; i < clocks.size(); i++) {
+        delete clocks[i];
+    }
 }
 
 
@@ -45,6 +48,7 @@ void Config::getDefaults()
 {
     show_calendar = true;
     show_timezones = false;
+    clock_format = string("%H:%M");
 }
 
 bool Config::getFile()
@@ -102,6 +106,14 @@ void Config::addOption(string var, string val)
         if (!fromString<bool>(show_timezones, val)) {
             show_timezones = false;
         }
+    } else if (var == "clock_format") {
+        clock_format = val;
+    } else if (var == "clock_label") {
+        ClockInfo* clockinfo = new ClockInfo;
+        clockinfo->label = val;
+        clocks.push_back(clockinfo);
+    } else if (var == "clock_tz") {
+        clocks[clocks.size() - 1]->timezone = val;
     }
 }
 
@@ -113,7 +125,10 @@ template <class T> bool Config::fromString(T& t, const string& s)
 
 string Config::strip(const string& s)
 {
-    return s.substr(s.find_first_not_of(' '),
-                    s.find_last_not_of(' ') + 1);
+    string::size_type const first = s.find_first_not_of(' ');
+    if (first == string::npos) {
+        return string();
+    }
+    return s.substr(first, s.find_last_not_of(' ') - first + 1);
 }
 

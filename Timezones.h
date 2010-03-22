@@ -1,6 +1,7 @@
 #ifndef TIMEZONES_H
 #define TIMEZONES_H
 
+#include <vector>
 #include <gtk/gtk.h>
 
 #include "Boxable.h"
@@ -16,7 +17,7 @@ public:
     void updateTime();
 
 protected:
-    Clock* clock;
+    vector<Clock*> clocks;
 
 };
 
