@@ -3,6 +3,7 @@
 #include <unique/unique.h>
 
 #include "MainWindow.h"
+#include "Config.h"
 
 
 MainWindow* main_window;
@@ -54,7 +55,11 @@ int main(int argc, char *argv[])
                          G_CALLBACK(message_received_cb), NULL);
         gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
                            GTK_SIGNAL_FUNC(destroy), NULL);
-        g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
+
+        Config* config = Config::getInstance();
+        if (config->show_timezones) {
+            g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
+        }
 
         gtk_main();
     }
