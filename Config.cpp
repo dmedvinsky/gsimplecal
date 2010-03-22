@@ -91,8 +91,6 @@ void Config::parseLine(string line)
     string var = strip(line.substr(0, pos));
     string val = strip(line.substr(pos + 1));
 
-    cout << var << " = " << val << endl;
-
     addOption(var, val);
 }
 
