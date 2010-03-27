@@ -1,0 +1,72 @@
+.TH GSIMPLECAL 1 "2010-04-01"
+.SH NAME
+gsimplecal \- lightweight calendar applet
+
+.SH SYNOPSIS
+.B gsimplecal
+
+.SH DESCRIPTION
+This manual page documents the usage of the
+.B gsimplecal
+command.
+
+.PP
+.B gsimplecal
+is a lightweight calendar applet. When it is started, it first shows up, when
+you run it again, it closes the running instance. It was intentionally made for
+use with tint2 panel to be launched upon clock click, but of course it will
+work without it, you can bind it to some hotkey in you window manager, for
+example.
+
+.SH CONFIGURATION
+.PP
+You may configure gsimplecal to display different world timezones clocks.
+To make it, you should create
+.nh
+\fB$XDG_CONFIG_HOME/gsimplecal/config\fP
+.ny
+file (usually it will be
+.nh
+~/.config/gsimplecal/config
+.ny
+) with the following contents:
+
+.IP
+show_calendar = 1
+.br
+show_timezones = 1
+.br
+clock_format = %a %d %b %H:%M
+.br
+clock_label = UTC
+.br
+clock_tz = :UTC
+.br
+clock_label = Local
+.br
+clock_tz = 
+
+.PP
+The options are pretty self explanatory, I guess. You can see
+the wiki page at http://code.google.com/p/gsimplecal/wiki/Configuration for more
+detailed description.
+.PP
+\fBNOTE\fP: The clock_label and clock_tz options must be in this order and go in
+pairs.
+.PP
+Also, if you omit the value for clock_tz option, local time will be used.
+.PP
+For a list of timezones see man timezone.
+.PP
+For possible clock formats see man strftime.
+
+.SH AUTHOR
+gsimplecal was written by Dmitry Medvinsky <dmitry.medvinsky@gmail.com>.
+.PP
+This manual page was written by the same person, that's why it isn't any of a
+help, programmers hate writing docs. Hopefullly, noone will ever see this man page.
+
+.SH SEE ALSO
+tzset(3),
+strftime(3)
+
