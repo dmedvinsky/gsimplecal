@@ -1,3 +1,6 @@
+AM_CPPFLAGS = @GTK2_CFLAGS@ @LIBUNIQUE_CFLAGS@
+LIBS = @GTK2_LIBS@ @LIBUNIQUE_LIBS@
+
 bin_PROGRAMS = gsimplecal
 gsimplecal_SOURCES = \
 	Boxable.cpp \
