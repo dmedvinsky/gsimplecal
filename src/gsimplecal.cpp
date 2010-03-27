@@ -2,8 +2,8 @@
 #include <gtk/gtk.h>
 #include <unique/unique.h>
 
-#include "MainWindow.h"
-#include "Config.h"
+#include "MainWindow.hpp"
+#include "Config.hpp"
 
 
 MainWindow* main_window;

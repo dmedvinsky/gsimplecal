@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 
-#include "Calendar.h"
+#include "Calendar.hpp"
 
 
 Calendar::Calendar()

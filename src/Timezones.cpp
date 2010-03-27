@@ -1,9 +1,9 @@
 #include <sys/time.h>
 #include <gtk/gtk.h>
 
-#include "Config.h"
-#include "Timezones.h"
-#include "Clock.h"
+#include "Config.hpp"
+#include "Timezones.hpp"
+#include "Clock.hpp"
 
 
 Timezones::Timezones()

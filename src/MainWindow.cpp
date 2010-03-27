@@ -1,9 +1,9 @@
 #include <gtk/gtk.h>
 
-#include "MainWindow.h"
-#include "Config.h"
-#include "Calendar.h"
-#include "Timezones.h"
+#include "MainWindow.hpp"
+#include "Config.hpp"
+#include "Calendar.hpp"
+#include "Timezones.hpp"
 
 
 MainWindow::MainWindow()

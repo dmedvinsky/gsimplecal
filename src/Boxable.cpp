@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 
-#include "Boxable.h"
+#include "Boxable.hpp"
 
 
 void Boxable::addToBox(GtkWidget* box)

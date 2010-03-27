@@ -3,8 +3,8 @@
 #include <sys/time.h>
 #include <gtk/gtk.h>
 
-#include "Clock.h"
-#include "Config.h"
+#include "Clock.hpp"
+#include "Config.hpp"
 
 using namespace std;
 
