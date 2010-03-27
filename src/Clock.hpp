@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #include <gtk/gtk.h>
 
-#include "Boxable.h"
+#include "Boxable.hpp"
 
 using namespace std;
 

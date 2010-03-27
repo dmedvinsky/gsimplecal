@@ -5,7 +5,7 @@
 #include <sstream>
 #include <glib/gstdio.h>
 
-#include "Config.h"
+#include "Config.hpp"
 
 using namespace std;
 

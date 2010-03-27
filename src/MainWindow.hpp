@@ -3,8 +3,8 @@
 
 #include <gtk/gtk.h>
 
-#include "Calendar.h"
-#include "Timezones.h"
+#include "Calendar.hpp"
+#include "Timezones.hpp"
 
 
 class MainWindow

@@ -3,7 +3,7 @@
 
 #include <gtk/gtk.h>
 
-#include "Boxable.h"
+#include "Boxable.hpp"
 
 
 class Calendar : public Boxable
