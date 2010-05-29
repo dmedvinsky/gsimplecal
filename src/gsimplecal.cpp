@@ -14,7 +14,7 @@ MainWindow* main_window;
 static void signal_handler(int signal_id)
 {
     if (signal_id == SIGTERM) {
-        destroy();
+        gtk_main_quit();
     }
 }
 
