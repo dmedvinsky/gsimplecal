@@ -16,4 +16,3 @@ Calendar::~Calendar()
 {
     gtk_widget_destroy(widget);
 }
-

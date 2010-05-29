@@ -1,5 +1,5 @@
-#ifndef CALENDAR_H
-#define CALENDAR_H
+#ifndef CALENDAR_HPP
+#define CALENDAR_HPP
 
 #include <gtk/gtk.h>
 

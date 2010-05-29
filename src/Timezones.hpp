@@ -1,7 +1,8 @@
-#ifndef TIMEZONES_H
-#define TIMEZONES_H
+#ifndef TIMEZONES_HPP
+#define TIMEZONES_HPP
 
 #include <vector>
+
 #include <gtk/gtk.h>
 
 #include "Boxable.hpp"

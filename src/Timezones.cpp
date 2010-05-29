@@ -37,4 +37,3 @@ void Timezones::updateTime()
         clocks[clock_num]->updateTime(clock_time);
     }
 }
-
