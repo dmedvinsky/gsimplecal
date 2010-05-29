@@ -1,5 +1,5 @@
-#ifndef BOXABLE_H
-#define BOXABLE_H
+#ifndef BOXABLE_HPP
+#define BOXABLE_HPP
 
 #include <gtk/gtk.h>
 
@@ -17,4 +17,3 @@ protected:
 };
 
 #endif
-

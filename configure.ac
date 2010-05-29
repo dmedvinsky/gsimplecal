@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.65])
-AC_INIT([gsimplecal], [0.2-hg], [http://code.google.com/p/gsimplecal/issues], [gsimplecal], [http://code.google.com/p/gsimplecal/])
+AC_INIT([gsimplecal], [0.4], [http://code.google.com/p/gsimplecal/issues], [gsimplecal], [http://code.google.com/p/gsimplecal/])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
@@ -14,21 +14,37 @@ AC_PROG_INSTALL
 PKG_PROG_PKG_CONFIG
 
 # Checks for libraries.
-PKG_CHECK_MODULES([LIBUNIQUE], [unique-1.0])
-AC_SUBST(LIBUNIQUE_CFLAGS)
-AC_SUBST(LIBUNIQUE_LIBS)
-
 PKG_CHECK_MODULES([GTK2], [gtk+-2.0])
 AC_SUBST(GTK2_CFLAGS)
 AC_SUBST(GTK2_LIBS)
 
 # Checks for header files.
-AC_CHECK_HEADERS([iostream string sstream fstream vector cstdlib stdlib.h sys/time.h])
+AC_CHECK_HEADERS([iostream \
+                  string \
+                  sstream \
+                  fstream \
+                  vector \
+                  cstdlib \
+                  stdlib.h \
+                  sys/time.h \
+                  sys/types.h \
+                  sys/ipc.h \
+                  sys/sem.h \
+                  signal.h \
+                  limits.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
-AC_CHECK_FUNCS([atexit gettimeofday setenv])
+AC_CHECK_FUNCS([atexit \
+                gettimeofday \
+                setenv \
+                signal \
+                kill \
+                semget \
+                semctl \
+                ftok \
+                readlink])
 
 #
 AM_CPPFLAGS="-Wall"

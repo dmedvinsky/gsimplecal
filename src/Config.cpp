@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+
 #include <glib/gstdio.h>
 
 #include "Config.hpp"
@@ -129,4 +130,3 @@ string Config::strip(const string& s)
     }
     return s.substr(first, s.find_last_not_of(' ') - first + 1);
 }
-

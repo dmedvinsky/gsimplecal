@@ -64,4 +64,3 @@ void MainWindow::updateTime()
         timezones->updateTime();
     }
 }
-

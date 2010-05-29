@@ -1,5 +1,5 @@
-AM_CPPFLAGS = @GTK2_CFLAGS@ @LIBUNIQUE_CFLAGS@
-LIBS = @GTK2_LIBS@ @LIBUNIQUE_LIBS@
+AM_CPPFLAGS = @GTK2_CFLAGS@
+LIBS = @GTK2_LIBS@
 
 bin_PROGRAMS = gsimplecal
 gsimplecal_SOURCES = \
@@ -15,5 +15,6 @@ gsimplecal_SOURCES = \
 	MainWindow.cpp \
 	MainWindow.hpp \
 	Timezones.cpp \
-	Timezones.hpp
-
+	Timezones.hpp \
+	Unique.cpp \
+	Unique.hpp

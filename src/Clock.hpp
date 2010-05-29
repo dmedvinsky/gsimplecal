@@ -1,5 +1,5 @@
-#ifndef CLOCK_H
-#define CLOCK_H
+#ifndef CLOCK_HPP
+#define CLOCK_HPP
 
 #include <string>
 #include <sys/time.h>
@@ -29,4 +29,3 @@ protected:
 };
 
 #endif
-
