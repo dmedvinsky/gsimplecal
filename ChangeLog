@@ -1,3 +1,6 @@
+2010-05-29: v0.4:
++ Use semaphores instead of libunique
+
 2010-03-27: v0.3:
 + Migrate to autotools
 
