@@ -21,14 +21,12 @@ public:
     ~Unique();
 
     bool isRunning();
+    void kill();
     void start();
     void stop();
 
 protected:
     key_t semaphore_key;
-
-private:
-    void _killProcess(int pid);
 
 };
 

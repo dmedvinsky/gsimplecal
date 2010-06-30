@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 {
     Unique* unique = new Unique();
     if (unique->isRunning()) {
-        unique->stop();
+        unique->kill();
     } else {
         unique->start();
         signal(SIGTERM, &signal_handler);
@@ -51,6 +51,8 @@ int main(int argc, char *argv[])
         }
 
         gtk_main();
+
+        unique->stop();
     }
 
     return 0;

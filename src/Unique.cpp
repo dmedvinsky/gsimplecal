@@ -70,7 +70,7 @@ void Unique::start()
     }
 }
 
-void Unique::stop()
+void Unique::kill()
 {
     if (isRunning()) {
         // Get semaphore; fail if not present.
@@ -81,13 +81,16 @@ void Unique::stop()
 
         // Get the pid from semaphore value (stored before) to kill the process.
         int pid = semctl(semid, 0, GETVAL, 0);
-        _killProcess(pid);
-        // Since we killed the process, we don't need the semaphore anymore.
+        ::kill(pid, SIGTERM);
         semctl(semid, 0, IPC_RMID, 0);
     }
 }
 
-void Unique::_killProcess(int pid)
+void Unique::stop()
 {
-    kill(pid, SIGTERM);
+    int semid = semget(semaphore_key, 1, 0660);
+    if (semid != -1) {
+        semctl(semid, 0, IPC_RMID, 0);
+    }
 }
+
