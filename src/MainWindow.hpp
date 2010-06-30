@@ -16,6 +16,8 @@ public:
     GtkWindow* getWindow();
     void updateTime();
 
+    void close();
+
 protected:
     GtkWidget* widget;
     GtkWidget* children_box;
