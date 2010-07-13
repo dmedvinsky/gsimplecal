@@ -1,3 +1,8 @@
+2010-07-13: v0.5:
++ Add keyboard shortcuts to close the gsimplecal
+* Add program crashes handling
++ Add keyboard shortcuts to switch months and years
+
 2010-05-29: v0.4:
 + Use semaphores instead of libunique
 
