@@ -2,8 +2,10 @@
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
+
 .SH SYNOPSIS
 .B gsimplecal
+
 
 .SH DESCRIPTION
 This manual page documents the usage of the
@@ -17,6 +19,7 @@ you run it again, it closes the running instance. It was intentionally made for
 use with tint2 panel to be launched upon clock click, but of course it will
 work without it, you can bind it to some hotkey in you window manager, for
 example.
+
 
 .SH CONFIGURATION
 .PP
@@ -56,15 +59,44 @@ pairs.
 .PP
 Also, if you omit the value for clock_tz option, local time will be used.
 .PP
-For a list of timezones see man timezone.
+For a list of timezones see \fBman timezone\fP, or \fBls /usr/share/zoneinfo\fP
 .PP
-For possible clock formats see man strftime.
+For possible clock formats see \fBman strftime\fP.
+
+
+.SH KEYBOARD ACCELERATORS
+.PP
+You may use the following keyboard accelerators while gsimplecal window has a focus:
+
+.IP
+Escape, Ctrl+w, Ctrl+q: close the window;
+.br
+j: switch to the next month;
+.br
+k: switch to the previous month;
+.br
+J: jump one year forward;
+.br
+K: jump one year backward.
+
+.PP
+These are not yet configurable, but I'm working on it.
+
+
+.SH REPORTING BUGS
+.PP
+Please, report any issues to the gsimplecal issue tracker, available at:
+.nh
+http://code.google.com/p/gsimplecal/issues/list
+.ny
+
 
 .SH AUTHOR
 gsimplecal was written by Dmitry Medvinsky <dmitry.medvinsky@gmail.com>.
 .PP
 This manual page was written by the same person, that's why it isn't any of a
 help, programmers hate writing docs. Hopefully, no one will ever see this man page.
+
 
 .SH SEE ALSO
 tzset(3),
