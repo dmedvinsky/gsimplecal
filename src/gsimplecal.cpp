@@ -34,26 +34,33 @@ int main(int argc, char *argv[])
 {
     Unique* unique = new Unique();
     if (unique->isRunning()) {
-        unique->kill();
-    } else {
-        unique->start();
-        signal(SIGTERM, &signal_handler);
-
-        gtk_init(&argc, &argv);
-        main_window = new MainWindow();
-
-        gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
-                           GTK_SIGNAL_FUNC(destroy), NULL);
-
-        Config* config = Config::getInstance();
-        if (config->show_timezones) {
-            g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
+        try {
+            unique->kill();
+            return 0;
+        } catch (UniqueException e) {
+            std::cerr << "Looks like gsimplecal crashed last time."
+                << " Exception message is: " << e.what() << ". Cleaning up."
+                << std::endl;
+            unique->stop();
         }
-
-        gtk_main();
-
-        unique->stop();
     }
 
+    unique->start();
+    signal(SIGTERM, &signal_handler);
+
+    gtk_init(&argc, &argv);
+    main_window = new MainWindow();
+
+    gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
+                       GTK_SIGNAL_FUNC(destroy), NULL);
+
+    Config* config = Config::getInstance();
+    if (config->show_timezones) {
+        g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
+    }
+
+    gtk_main();
+
+    unique->stop();
     return 0;
 }

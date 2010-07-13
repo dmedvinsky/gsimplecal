@@ -66,8 +66,7 @@ void Unique::start()
         // kill the process from the second instance.
         union semun semopts;
         semopts.val = getpid();
-        int ret = semctl(semid, 0, SETVAL, semopts);
-        if (ret == -1) {
+        if (semctl(semid, 0, SETVAL, semopts) == -1) {
             throw UniqueException("semctl (SETVAL) failed");
         }
     }
@@ -84,10 +83,12 @@ void Unique::kill()
 
         // Get the pid from semaphore value (stored before) to kill the process.
         int pid = semctl(semid, 0, GETVAL, 0);
-        if (pid == -1) {
+        if (pid <= 0) {
             throw UniqueException("semctl (GETVAL) failed");
         }
-        ::kill(pid, SIGTERM);
+        if (::kill(pid, SIGTERM)) {
+            throw UniqueException("kill failed");
+        }
         semctl(semid, 0, IPC_RMID, 0);
     }
 }
