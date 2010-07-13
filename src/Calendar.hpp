@@ -12,6 +12,13 @@ public:
     Calendar();
     ~Calendar();
 
+    void nextYear();
+    void prevYear();
+    void nextMonth();
+    void prevMonth();
+
+protected:
+    void _change(int year_offset, int month_offset);
 };
 
 #endif
