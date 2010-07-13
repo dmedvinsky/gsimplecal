@@ -34,7 +34,7 @@ Unique::Unique()
     // Get unique key for semaphore.
     semaphore_key = ftok(filename, 1);
     if (semaphore_key == -1) {
-        throw new UniqueException();
+        throw new UniqueException("ftok failed");
     }
     delete[] filename;
 }
@@ -59,14 +59,17 @@ void Unique::start()
         int semid = semget(semaphore_key, 1,
                            IPC_CREAT | IPC_EXCL | 0660);
         if (semid == -1) {
-            throw UniqueException();
+            throw UniqueException("semget failed while creating semaphore");
         }
 
         // Set initial semaphore value to the current pid, so we could use it to
         // kill the process from the second instance.
         union semun semopts;
         semopts.val = getpid();
-        semctl(semid, 0, SETVAL, semopts);
+        int ret = semctl(semid, 0, SETVAL, semopts);
+        if (ret == -1) {
+            throw UniqueException("semctl (SETVAL) failed");
+        }
     }
 }
 
@@ -76,11 +79,14 @@ void Unique::kill()
         // Get semaphore; fail if not present.
         int semid = semget(semaphore_key, 1, 0660);
         if (semid == -1) {
-            throw UniqueException();
+            throw UniqueException("semget failed while trying to kill");
         }
 
         // Get the pid from semaphore value (stored before) to kill the process.
         int pid = semctl(semid, 0, GETVAL, 0);
+        if (pid == -1) {
+            throw UniqueException("semctl (GETVAL) failed");
+        }
         ::kill(pid, SIGTERM);
         semctl(semid, 0, IPC_RMID, 0);
     }
