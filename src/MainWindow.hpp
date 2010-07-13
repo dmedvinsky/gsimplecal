@@ -18,13 +18,20 @@ public:
 
     void close();
 
+    Calendar* calendar;
+
 protected:
     GtkWidget* widget;
     GtkWidget* children_box;
-
-    Calendar* calendar;
     Timezones* timezones;
 
+};
+
+struct Shortcut
+{
+    int key;
+    int modifier;
+    bool (*func)(GtkAccelGroup*, GObject*, guint, GdkModifierType, void*);
 };
 
 #endif

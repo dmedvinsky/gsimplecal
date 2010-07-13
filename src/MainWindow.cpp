@@ -15,6 +15,38 @@ bool closeCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     }
     return true;
 }
+bool nextYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                       GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->calendar->nextYear();
+    }
+    return true;
+}
+bool prevYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                       GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->calendar->prevYear();
+    }
+    return true;
+}
+bool nextMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                       GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->calendar->nextMonth();
+    }
+    return true;
+}
+bool prevMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                       GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->calendar->prevMonth();
+    }
+    return true;
+}
 
 
 MainWindow::MainWindow()
@@ -55,13 +87,17 @@ MainWindow::MainWindow()
     GtkAccelGroup *accelerators = gtk_accel_group_new();
     GClosure *closure;
 
-    int keys[3][2] = {{GDK_Escape, 0},
-                      {GDK_q, GDK_CONTROL_MASK},
-                      {GDK_w, GDK_CONTROL_MASK}};
-    for (int key = 0; key < 3; key++) {
-        closure = g_cclosure_new(G_CALLBACK(closeCallback), (gpointer)this, NULL);
-        gtk_accel_group_connect(accelerators, keys[key][0],
-                                (GdkModifierType)keys[key][1],
+    Shortcut keys[7] = {{GDK_Escape, 0, closeCallback},
+                        {GDK_q, GDK_CONTROL_MASK, closeCallback},
+                        {GDK_w, GDK_CONTROL_MASK, closeCallback},
+                        {GDK_j, GDK_SHIFT_MASK, nextYearCallback},
+                        {GDK_k, GDK_SHIFT_MASK, prevYearCallback},
+                        {GDK_j, 0, nextMonthCallback},
+                        {GDK_k, 0, prevMonthCallback}};
+    for (int key = 0; key < 7; key++) {
+        closure = g_cclosure_new(G_CALLBACK(keys[key].func), (gpointer)this, NULL);
+        gtk_accel_group_connect(accelerators, keys[key].key,
+                                (GdkModifierType)keys[key].modifier,
                                 (GtkAccelFlags)NULL, closure);
         g_closure_unref(closure);
     }
