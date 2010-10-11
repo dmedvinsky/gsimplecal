@@ -1,4 +1,4 @@
-.TH GSIMPLECAL 1 "2010-04-01"
+.TH GSIMPLECAL 1 "2010-10-10"
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
@@ -30,9 +30,9 @@ To make it, you should create
 .ny
 file (usually it will be
 .nh
-~/.config/gsimplecal/config
+~/.config/gsimplecal/config)
 .ny
-) with the following contents:
+with the following contents:
 
 .IP
 show_calendar = 1
@@ -40,6 +40,17 @@ show_calendar = 1
 show_timezones = 1
 .br
 clock_format = %a %d %b %H:%M
+.br
+mainwindow_decorated = 0
+.br
+mainwindow_keep_above = 1
+.br
+mainwindow_sticky = 0
+.br
+mainwindow_skip_taskbar = 1
+.br
+mainwindow_position = none
+.br
 .br
 clock_label = UTC
 .br
@@ -50,18 +61,68 @@ clock_label = Local
 clock_tz = 
 
 .PP
-The options are pretty self explanatory, I guess. You can see
-the wiki page at http://code.google.com/p/gsimplecal/wiki/Configuration for more
-detailed description.
-.PP
-\fBNOTE\fP: The clock_label and clock_tz options must be in this order and go in
-pairs.
-.PP
-Also, if you omit the value for clock_tz option, local time will be used.
-.PP
-For a list of timezones see \fBman timezone\fP, or \fBls /usr/share/zoneinfo\fP
-.PP
-For possible clock formats see \fBman strftime\fP.
+The options are pretty self explanatory, but here is detailed description:
+
+.TP 5
+\fBshow_calendar\fP: 1 or 0, defaults to 1.
+Sets whether the calendar should be shown. Most users want this option to be 1.
+
+.TP 5
+\fBshow_timezones\fP: 1 or 0, defaults to 0.
+Sets whether the different timezone clocks should be shown.
+
+.TP 5
+\fBclock_format\fP: string
+Sets the clocks format. Look \fIman strftime\fP for the possible formats.
+
+.TP 5
+\fBmainwindow_decorated\fP: 1 or 0, defaults to 0.
+Tells your window manager to decorate or not to decorate the main window.
+
+.TP 5
+\fBmainwindow_keep_above\fP: 1 or 0, defaults to 1.
+Sets whether the main window should be placed on top of other windows by your
+window manager.
+
+.TP 5
+\fBmainwindow_sticky\fP: 1 or 0, defaults to 0.
+Tells your window manager to show gsimplecal on all desktops.
+
+.TP 5
+\fBmainwindow_skip_taskbar\fP: 1 or 0, defaults to 1.
+Sets whether the main window should be shown in the task list by your panel or
+window manager.
+
+.TP 5
+\fBmainwindow_position\fP: mouse|center|none, defaults to mouse.
+Tells your window manager where to place the gsimplecal window:
+.TP 10
+     \fBmouse\fP
+.br
+close to the mouse cursor position (this one is useful when you bind gsimplecal
+on some mouse click command);
+.TP 10
+     \fBcenter\fP
+.br
+in the center of the screen;
+.TP 10
+     \fBnone\fP
+.br
+it's up to your window manager to decide, where to place the window
+(this one is useful when you bind gsimplecal invocation on some hotkey, so you
+can configure your window manager to place gsimplecal in some predefined
+position).
+
+.TP 5
+\fBclock_label\fP and \fBclock_tz\fP: string
+These two options should go in pairs and \fBmust\fP be in the order given.
+.br
+Each pair creates new clock. The clock_label variable sets the string to be
+displayed near the clock, the clock_tz sets the timezone.
+.br
+If you omit the value for clock_tz, local time will be shown.
+.br
+For a list of timezones see \fIman timezone\fP, or \fIls /usr/share/zoneinfo\fP
 
 
 .SH KEYBOARD ACCELERATORS
@@ -87,18 +148,14 @@ These are not yet configurable, but I'm working on it.
 .PP
 Please, report any issues to the gsimplecal issue tracker, available at:
 .nh
-http://code.google.com/p/gsimplecal/issues/list
+http://github.com/dmedvinsky/gsimplecal/issues
 .ny
 
 
 .SH AUTHOR
-gsimplecal was written by Dmitry Medvinsky <dmitry.medvinsky@gmail.com>.
-.PP
-This manual page was written by the same person, that's why it isn't any of a
-help, programmers hate writing docs. Hopefully, no one will ever see this man page.
+Created by Dmitry Medvinsky et al.
 
 
 .SH SEE ALSO
 tzset(3),
 strftime(3)
-

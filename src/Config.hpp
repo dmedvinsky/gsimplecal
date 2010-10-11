@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include <gtk/gtk.h>
+
 using namespace std;
 
 typedef struct _ClockInfo
@@ -24,6 +26,12 @@ public:
     bool show_timezones;
     string clock_format;
     vector<ClockInfo*> clocks;
+
+    bool mainwindow_decorated;
+    bool mainwindow_keep_above;
+    bool mainwindow_sticky;
+    bool mainwindow_skip_taskbar;
+    GtkWindowPosition mainwindow_position;
 
 private:
     static Config* _instance;

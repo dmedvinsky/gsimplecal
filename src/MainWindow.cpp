@@ -16,7 +16,7 @@ bool closeCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     return true;
 }
 bool nextYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
-                       GdkModifierType mod, gpointer user_data)
+                      GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
         ((MainWindow*)user_data)->calendar->nextYear();
@@ -24,7 +24,7 @@ bool nextYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     return true;
 }
 bool prevYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
-                       GdkModifierType mod, gpointer user_data)
+                      GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
         ((MainWindow*)user_data)->calendar->prevYear();
@@ -51,21 +51,25 @@ bool prevMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
 
 MainWindow::MainWindow()
 {
+    Config* config = Config::getInstance();
+
     widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
     gtk_window_set_title(GTK_WINDOW(widget), "gsimplecal");
-    gtk_window_set_decorated(GTK_WINDOW(widget), false);
-    gtk_window_set_keep_above(GTK_WINDOW(widget), true);
-    // Omnipresent
-    gtk_window_stick(GTK_WINDOW(widget));
-    gtk_window_set_skip_taskbar_hint(GTK_WINDOW(widget), true);
-    // Place it near mouse (near the clock for example)
-    gtk_window_set_position(GTK_WINDOW(widget), GTK_WIN_POS_MOUSE);
+    gtk_window_set_decorated(GTK_WINDOW(widget),
+                             config->mainwindow_decorated);
+    gtk_window_set_keep_above(GTK_WINDOW(widget),
+                              config->mainwindow_keep_above);
+    gtk_window_set_skip_taskbar_hint(GTK_WINDOW(widget),
+                                     config->mainwindow_skip_taskbar);
+    gtk_window_set_position(GTK_WINDOW(widget),
+                            config->mainwindow_position);
+    if (config->mainwindow_sticky) {
+        gtk_window_stick(GTK_WINDOW(widget));
+    }
 
     // Create box for child items
     children_box = gtk_vbox_new(false, 10);
-
-    Config* config = Config::getInstance();
 
     calendar = NULL;
     if (config->show_calendar) {

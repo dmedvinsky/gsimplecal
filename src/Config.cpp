@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include <glib/gstdio.h>
+#include <gtk/gtk.h>
 
 #include "Config.hpp"
 
@@ -50,6 +51,11 @@ void Config::getDefaults()
     show_calendar = true;
     show_timezones = false;
     clock_format = string("%H:%M");
+    mainwindow_decorated = false;
+    mainwindow_keep_above = true;
+    mainwindow_sticky = false;
+    mainwindow_skip_taskbar = true;
+    mainwindow_position = GTK_WIN_POS_MOUSE;
 }
 
 bool Config::getFile()
@@ -113,6 +119,30 @@ void Config::addOption(string var, string val)
         clocks.push_back(clockinfo);
     } else if (var == "clock_tz") {
         clocks[clocks.size() - 1]->timezone = val;
+    } else if (var == "mainwindow_decorated") {
+        if (!fromString<bool>(mainwindow_decorated, val)) {
+            mainwindow_decorated = false;
+        }
+    } else if (var == "mainwindow_keep_above") {
+        if (!fromString<bool>(mainwindow_keep_above, val)) {
+            mainwindow_keep_above = true;
+        }
+    } else if (var == "mainwindow_sticky") {
+        if (!fromString<bool>(mainwindow_sticky, val)) {
+            mainwindow_sticky = false;
+        }
+    } else if (var == "mainwindow_skip_taskbar") {
+        if (!fromString<bool>(mainwindow_skip_taskbar, val)) {
+            mainwindow_skip_taskbar = true;
+        }
+    } else if (var == "mainwindow_position") {
+        if (val == "center") {
+            mainwindow_position = GTK_WIN_POS_CENTER;
+        } else if (val == "mouse") {
+            mainwindow_position = GTK_WIN_POS_MOUSE;
+        } else {
+            mainwindow_position = GTK_WIN_POS_NONE;
+        }
     }
 }
 
