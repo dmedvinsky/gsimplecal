@@ -5,6 +5,12 @@ gsimplecal \- lightweight calendar applet
 
 .SH SYNOPSIS
 .B gsimplecal
+.br
+.B gsimplecal
+next_month
+.br
+.B gsimplecal
+prev_month
 
 
 .SH DESCRIPTION
@@ -19,6 +25,13 @@ you run it again, it closes the running instance. It was intentionally made for
 use with tint2 panel to be launched upon clock click, but of course it will
 work without it, you can bind it to some hotkey in you window manager, for
 example.
+
+.PP
+When you provide one of the arguments —
+.B next_month
+or
+.B prev_month
+— instead of closing the running instance, the displaying month is changed.
 
 
 .SH CONFIGURATION
@@ -50,7 +63,6 @@ mainwindow_sticky = 0
 mainwindow_skip_taskbar = 1
 .br
 mainwindow_position = none
-.br
 .br
 clock_label = UTC
 .br
