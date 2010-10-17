@@ -30,6 +30,8 @@ public:
 
     bool isRunning();
     void kill();
+    void kill(int signal_id);
+    void signal(int signal_id);
     void start();
     void stop();
 

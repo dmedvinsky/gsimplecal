@@ -72,7 +72,15 @@ void Unique::start()
     }
 }
 
+void Unique::signal(int signal_id)
+{
+    kill(signal_id);
+}
 void Unique::kill()
+{
+    kill(SIGTERM);
+}
+void Unique::kill(int signal_id)
 {
     if (isRunning()) {
         // Get semaphore; fail if not present.
@@ -86,10 +94,9 @@ void Unique::kill()
         if (pid <= 0) {
             throw UniqueException("semctl (GETVAL) failed");
         }
-        if (::kill(pid, SIGTERM)) {
+        if (::kill(pid, signal_id)) {
             throw UniqueException("kill failed");
         }
-        semctl(semid, 0, IPC_RMID, 0);
     }
 }
 
@@ -100,4 +107,3 @@ void Unique::stop()
         semctl(semid, 0, IPC_RMID, 0);
     }
 }
-
