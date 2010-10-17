@@ -1,7 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.65])
-AC_INIT([gsimplecal], [0.5], [http://code.google.com/p/gsimplecal/issues], [gsimplecal], [http://code.google.com/p/gsimplecal/])
+AC_INIT([gsimplecal],
+        [0.5],
+        [http://github.com/dmedvinsky/gsimplecal/issues],
+        [gsimplecal],
+        [http://github.com/dmedvinsky/gsimplecal])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
