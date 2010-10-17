@@ -19,7 +19,7 @@ bool nextYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
                       GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
-        ((MainWindow*)user_data)->calendar->nextYear();
+        ((MainWindow*)user_data)->nextYear();
     }
     return true;
 }
@@ -27,7 +27,7 @@ bool prevYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
                       GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
-        ((MainWindow*)user_data)->calendar->prevYear();
+        ((MainWindow*)user_data)->prevYear();
     }
     return true;
 }
@@ -35,7 +35,7 @@ bool nextMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
                        GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
-        ((MainWindow*)user_data)->calendar->nextMonth();
+        ((MainWindow*)user_data)->nextMonth();
     }
     return true;
 }
@@ -43,7 +43,7 @@ bool prevMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
                        GdkModifierType mod, gpointer user_data)
 {
     if (user_data) {
-        ((MainWindow*)user_data)->calendar->prevMonth();
+        ((MainWindow*)user_data)->prevMonth();
     }
     return true;
 }
@@ -136,4 +136,22 @@ void MainWindow::updateTime()
 void MainWindow::close()
 {
     gtk_signal_emit_by_name(GTK_OBJECT(widget), "destroy");
+}
+
+void MainWindow::nextMonth()
+{
+    calendar->nextMonth();
+}
+void MainWindow::prevMonth()
+{
+    calendar->prevMonth();
+}
+
+void MainWindow::nextYear()
+{
+    calendar->nextYear();
+}
+void MainWindow::prevYear()
+{
+    calendar->prevYear();
 }

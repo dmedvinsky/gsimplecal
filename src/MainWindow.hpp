@@ -18,6 +18,11 @@ public:
 
     void close();
 
+    void nextMonth();
+    void prevMonth();
+    void nextYear();
+    void prevYear();
+
     Calendar* calendar;
 
 protected:
