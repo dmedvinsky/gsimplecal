@@ -1,8 +1,9 @@
 Developers:
- * Dmitry Medvinsky <dmitry.medvinsky@gmail.com>
+ * Dmitry Medvinsky <dmedvinsky@gmail.com>
 
 
 Contributors:
  * Victor Feight <vrfeight3@gmail.com>: Arch Linux package
  * Joshua Saddler <nightmorph@gentoo.org>: Gentoo Linux package
-
+ * Filip Pytloun <filip.pytloun@stickfish.com>: Fedora Linux package
+ * maelnor: Gentoo ebuild
