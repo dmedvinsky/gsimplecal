@@ -4,6 +4,10 @@
     border: none;
 }
 
+a { text-decoration: none; }
+a:visited { color: #333; }
+a:hover { text-decoration: underline; }
+
 body {
     background: #999;
 }
