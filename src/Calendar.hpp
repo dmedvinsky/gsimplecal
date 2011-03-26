@@ -17,8 +17,15 @@ public:
     void nextMonth();
     void prevMonth();
 
+    bool markToday();
+
 protected:
     void _change(int year_offset, int month_offset);
+
+private:
+    guint today_year;
+    guint today_month;
+    guint today_day;
 };
 
 #endif

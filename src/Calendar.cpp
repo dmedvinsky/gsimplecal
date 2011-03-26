@@ -3,12 +3,29 @@
 #include "Calendar.hpp"
 
 
+void monthChangedCb(GtkCalendar *calendar, gpointer cls)
+{
+    if (cls) {
+        ((Calendar*)cls)->markToday();
+    }
+}
+
+
 Calendar::Calendar()
 {
     widget = gtk_calendar_new();
     gtk_calendar_set_display_options(GTK_CALENDAR(widget),
             (GtkCalendarDisplayOptions)(GTK_CALENDAR_SHOW_HEADING +
                                         GTK_CALENDAR_SHOW_DAY_NAMES));
+    // Store today date...
+    gtk_calendar_get_date((GtkCalendar*)widget,
+                          &today_year, &today_month, &today_day);
+    // ...to mark it.
+    markToday();
+    // Also, when the month is changed, that day shouldn't be marked anymore.
+    gtk_signal_connect(GTK_OBJECT(widget), "month-changed",
+                       GTK_SIGNAL_FUNC(monthChangedCb), (gpointer)this);
+
     gtk_widget_show(widget);
 }
 
@@ -49,4 +66,17 @@ void Calendar::_change(int year_offset, int month_offset)
     }
     year += year_offset;
     gtk_calendar_select_month((GtkCalendar*)widget, (guint)month, (guint)year);
+}
+
+bool Calendar::markToday()
+{
+    guint year, month;
+    gtk_calendar_get_date((GtkCalendar*)widget, &year, &month, NULL);
+    if (year == today_year && month == today_month) {
+        gtk_calendar_mark_day((GtkCalendar*)widget, today_day);
+        return true;
+    } else {
+        gtk_calendar_unmark_day((GtkCalendar*)widget, today_day);
+        return false;
+    }
 }
