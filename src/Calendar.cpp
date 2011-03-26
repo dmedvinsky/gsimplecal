@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
 #include "Calendar.hpp"
+#include "Config.hpp"
 
 
 void monthChangedCb(GtkCalendar *calendar, gpointer cls)
@@ -17,14 +18,16 @@ Calendar::Calendar()
     gtk_calendar_set_display_options(GTK_CALENDAR(widget),
             (GtkCalendarDisplayOptions)(GTK_CALENDAR_SHOW_HEADING +
                                         GTK_CALENDAR_SHOW_DAY_NAMES));
-    // Store today date...
-    gtk_calendar_get_date((GtkCalendar*)widget,
-                          &today_year, &today_month, &today_day);
-    // ...to mark it.
-    markToday();
-    // Also, when the month is changed, that day shouldn't be marked anymore.
-    gtk_signal_connect(GTK_OBJECT(widget), "month-changed",
-                       GTK_SIGNAL_FUNC(monthChangedCb), (gpointer)this);
+
+    Config* config = Config::getInstance();
+    if (config->mark_today) {
+        // Store today date to know be able to mark it after month changes.
+        gtk_calendar_get_date((GtkCalendar*)widget,
+                              &today_year, &today_month, &today_day);
+        markToday();
+        gtk_signal_connect(GTK_OBJECT(widget), "month-changed",
+                           GTK_SIGNAL_FUNC(monthChangedCb), (gpointer)this);
+    }
 
     gtk_widget_show(widget);
 }

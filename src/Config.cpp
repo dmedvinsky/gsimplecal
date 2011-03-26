@@ -56,6 +56,7 @@ void Config::getDefaults()
     mainwindow_sticky = false;
     mainwindow_skip_taskbar = true;
     mainwindow_position = GTK_WIN_POS_MOUSE;
+    mark_today = true;
 }
 
 bool Config::getFile()
@@ -142,6 +143,10 @@ void Config::addOption(string var, string val)
             mainwindow_position = GTK_WIN_POS_MOUSE;
         } else {
             mainwindow_position = GTK_WIN_POS_NONE;
+        }
+    } else if (var == "mark_today") {
+        if (!fromString<bool>(mark_today, val)) {
+            mark_today = true;
         }
     }
 }
