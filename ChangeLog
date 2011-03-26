@@ -1,3 +1,6 @@
+2011-03-26: v0.7:
++ Mark today even when selecting some other day
+
 2010-10-18: v0.6:
 + Add next_month and prev_month command line arguments
 + Add more config options (see man page)
