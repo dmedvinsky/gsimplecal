@@ -19,3 +19,5 @@ get a lot of questions and I feel kind of lonely. ;)
 
 .. _tint2: http://code.google.com/p/tint2/
 .. _openbox: http://openbox.org/wiki/Main_Page
+
+.. image:: https://github.com/dmedvinsky/gsimplecal/raw/gh-pages/g/scrot2.png
