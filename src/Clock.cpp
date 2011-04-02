@@ -52,7 +52,6 @@ string Clock::getTimeForTZ(const timeval& time, const string& zone)
 
         if (old_tz) {
             setenv("TZ", old_tz, 1);
-            delete[] old_tz;
         } else {
             unsetenv("TZ");
         }
