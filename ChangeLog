@@ -1,3 +1,7 @@
+2011-04-03: v0.8:
+- Fix segmentation fault in the clock
++ Add keyboard bindings to go to the current date
+
 2011-03-26: v0.7:
 + Mark today even when selecting some other day
 
