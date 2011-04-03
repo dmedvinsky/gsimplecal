@@ -83,3 +83,9 @@ bool Calendar::markToday()
         return false;
     }
 }
+
+void Calendar::goToday()
+{
+    gtk_calendar_select_month((GtkCalendar*)widget, today_month, today_year);
+    gtk_calendar_select_day((GtkCalendar*)widget, today_day);
+}

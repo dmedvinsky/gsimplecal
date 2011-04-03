@@ -22,6 +22,7 @@ public:
     void prevMonth();
     void nextYear();
     void prevYear();
+    void goToday();
 
     Calendar* calendar;
 

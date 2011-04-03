@@ -47,6 +47,14 @@ bool prevMonthCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     }
     return true;
 }
+bool goTodayCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                     GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->goToday();
+    }
+    return true;
+}
 
 
 MainWindow::MainWindow()
@@ -91,14 +99,16 @@ MainWindow::MainWindow()
     GtkAccelGroup *accelerators = gtk_accel_group_new();
     GClosure *closure;
 
-    Shortcut keys[7] = {{GDK_Escape, 0, closeCallback},
-                        {GDK_q, GDK_CONTROL_MASK, closeCallback},
-                        {GDK_w, GDK_CONTROL_MASK, closeCallback},
-                        {GDK_j, GDK_SHIFT_MASK, nextYearCallback},
-                        {GDK_k, GDK_SHIFT_MASK, prevYearCallback},
-                        {GDK_j, 0, nextMonthCallback},
-                        {GDK_k, 0, prevMonthCallback}};
-    for (int key = 0; key < 7; key++) {
+    Shortcut keys[] = {{GDK_Escape, 0, closeCallback},
+                       {GDK_q, GDK_CONTROL_MASK, closeCallback},
+                       {GDK_w, GDK_CONTROL_MASK, closeCallback},
+                       {GDK_j, GDK_SHIFT_MASK, nextYearCallback},
+                       {GDK_k, GDK_SHIFT_MASK, prevYearCallback},
+                       {GDK_j, 0, nextMonthCallback},
+                       {GDK_k, 0, prevMonthCallback},
+                       {GDK_g, 0, goTodayCallback},
+                       {GDK_Home, 0, goTodayCallback}};
+    for (int key = 0; key < 9; key++) {
         closure = g_cclosure_new(G_CALLBACK(keys[key].func), (gpointer)this, NULL);
         gtk_accel_group_connect(accelerators, keys[key].key,
                                 (GdkModifierType)keys[key].modifier,
@@ -138,6 +148,10 @@ void MainWindow::close()
     gtk_signal_emit_by_name(GTK_OBJECT(widget), "destroy");
 }
 
+void MainWindow::goToday()
+{
+    calendar->goToday();
+}
 void MainWindow::nextMonth()
 {
     calendar->nextMonth();

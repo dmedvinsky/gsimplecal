@@ -16,6 +16,7 @@ public:
     void prevYear();
     void nextMonth();
     void prevMonth();
+    void goToday();
 
     bool markToday();
 
