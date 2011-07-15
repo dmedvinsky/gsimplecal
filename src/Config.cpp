@@ -87,8 +87,8 @@ void Config::parseLine(string line)
     if (!line.length() || line[0] == '#') {
         return;
     }
-    int pos;
-    for (pos = line.length() - 1; pos >= 0; pos--) {
+    int pos, len = line.length();
+    for (pos = 0; pos < len; pos++) {
         if (line[pos] == '=') {
             break;
         }
