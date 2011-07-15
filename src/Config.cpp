@@ -87,13 +87,8 @@ void Config::parseLine(string line)
     if (!line.length() || line[0] == '#') {
         return;
     }
-    int pos, len = line.length();
-    for (pos = 0; pos < len; pos++) {
-        if (line[pos] == '=') {
-            break;
-        }
-    }
-    if (pos == -1) {
+    size_t pos = line.find_first_of('=');
+    if (pos == string::npos) {
         return;
     }
     string var = strip(line.substr(0, pos));
