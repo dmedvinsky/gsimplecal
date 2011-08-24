@@ -143,6 +143,8 @@ void Config::addOption(string var, string val)
         if (!fromString<bool>(mark_today, val)) {
             mark_today = true;
         }
+    } else if (var == "external_viewer") {
+        external_viewer = val;
     }
 }
 

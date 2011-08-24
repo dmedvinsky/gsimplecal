@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
     signal(SIGTERM, &signal_handler);
     signal(SIGUSR1, &signal_handler);
     signal(SIGUSR2, &signal_handler);
+    signal(SIGCHLD, SIG_IGN);
 
     gtk_init(&argc, &argv);
     main_window = new MainWindow();

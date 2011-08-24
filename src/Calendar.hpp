@@ -19,6 +19,7 @@ public:
     void goToday();
 
     bool markToday();
+    bool runExternalViewer();
 
 protected:
     void _change(int year_offset, int month_offset);
