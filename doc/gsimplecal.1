@@ -54,6 +54,8 @@ show_timezones = 1
 .br
 mark_today = 1
 .br
+external_viewer = sunbird --cool-arg --date="%Y-%m-%d"
+.br
 clock_format = %a %d %b %H:%M
 .br
 mainwindow_decorated = 0
@@ -90,6 +92,20 @@ Sets whether the different timezone clocks should be shown.
 Sets whether today's date will be marked in the calendar (besides the default
 selection, i.e. when you click on the other day, today will remain marked
 somehow, e.g. in bold print).
+
+.TP 5
+\fBexternal_viewer\fP: string, defaults to empty string.
+Command line to run when doubleclicking a date. This string is strftime'd
+(see \fIman strftime\fP for the possible substitutions)
+and passed to the shell. Thus you can use pipes, redirections, and whatever,
+I hope.
+.br
+Currently the shell is hardcoded to
+.nh
+/bin/sh
+.ny
+though. I hope that will do for all the users, but if you've got a trouble,
+please file a ticket (see \fIREPORTING BUGS\fP).
 
 .TP 5
 \fBclock_format\fP: string
