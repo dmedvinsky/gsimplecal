@@ -41,7 +41,7 @@ Calendar::Calendar()
 
     Config* config = Config::getInstance();
     if (config->mark_today) {
-        // Store today date to know be able to mark it after month changes.
+        // Store today date to be able to mark it after month changes.
         gtk_calendar_get_date((GtkCalendar*)widget,
                               &today_year, &today_month, &today_day);
         markToday();
