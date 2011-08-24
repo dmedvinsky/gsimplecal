@@ -1,3 +1,8 @@
+2011-08-24: v0.9:
+- Fix license text not included in distribution
+- Fix last `=` was treated as separator of key/value in config, not the first
++ Add ability to execute external viewer upon doubleclick on a date
+
 2011-04-03: v0.8:
 - Fix segmentation fault in the clock
 + Add keyboard bindings to go to the current date
