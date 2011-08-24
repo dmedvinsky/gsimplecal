@@ -1,5 +1,3 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.65])
 AC_INIT([gsimplecal],
         [0.8],
@@ -48,9 +46,11 @@ AC_CHECK_FUNCS([atexit \
                 semget \
                 semctl \
                 ftok \
-                readlink])
+                readlink \
+                fork \
+                execl])
 
-#
+# Flags
 AM_CPPFLAGS="-Wall"
 AM_LDFLAGS="-Wl,--as-needed"
 AC_SUBST(AM_CFLAGS)
