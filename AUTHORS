@@ -1,9 +1,16 @@
-Authors & Contributors:
+Code and stuff:
  * Dmitry Medvinsky <dmedvinsky@gmail.com>
- * Kim Hempel <kim@hempel.nu>: issue reports, patches
- * Victor Feight <vrfeight3@gmail.com>: Arch Linux package
- * Joshua Saddler <nightmorph@gentoo.org>: Gentoo Linux package
- * Filip Pytloun <filip.pytloun@stickfish.com>: Fedora Linux package
- * maelnor: Gentoo Linux package
- * Sergei Sarbash <sarbash.s@gmail.com>: ideas for improvements
- * Julien Valroff <julien@kirya.net>: issue reports, ideas for improvements
+ * Kim Hempel <kim@hempel.nu>
+
+Bugs and ideas:
+ * Sergei Sarbash <sarbash.s@gmail.com>
+ * Julien Valroff <julien@kirya.net>
+
+Packages:
+ - Arch Linux:
+  * Victor Feight <vrfeight3@gmail.com>
+ - Gentoo Linux:
+  * Joshua Saddler <nightmorph@gentoo.org>
+  * maelnor
+ - Fedora Linux
+  * Filip Pytloun <filip.pytloun@stickfish.com>
