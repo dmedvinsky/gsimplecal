@@ -1,9 +1,9 @@
 AC_PREREQ([2.65])
 AC_INIT([gsimplecal],
         [0.8],
-        [http://github.com/dmedvinsky/gsimplecal/issues],
+        [https://github.com/dmedvinsky/gsimplecal/issues],
         [gsimplecal],
-        [http://github.com/dmedvinsky/gsimplecal])
+        [https://github.com/dmedvinsky/gsimplecal])
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
