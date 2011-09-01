@@ -40,11 +40,9 @@ You may configure gsimplecal to display different world timezones clocks.
 To make it, you should create
 .nh
 \fB$XDG_CONFIG_HOME/gsimplecal/config\fP
-.ny
 file (usually it will be
 .nh
 ~/.config/gsimplecal/config)
-.ny
 with the following contents:
 
 .IP
@@ -54,7 +52,7 @@ show_timezones = 1
 .br
 mark_today = 1
 .br
-external_viewer = sunbird --cool-arg --date="%Y-%m-%d"
+external_viewer = sunbird -\-cool-arg -\-date="%Y-%m-%d"
 .br
 clock_format = %a %d %b %H:%M
 .br
@@ -103,7 +101,6 @@ I hope.
 Currently the shell is hardcoded to
 .nh
 /bin/sh
-.ny
 though. I hope that will do for all the users, but if you've got a trouble,
 please file a ticket (see \fIREPORTING BUGS\fP).
 
@@ -187,7 +184,6 @@ These are not yet configurable, but I'm working on it.
 Please, report any issues to the gsimplecal issue tracker, available at:
 .nh
 https://github.com/dmedvinsky/gsimplecal/issues
-.ny
 
 
 .SH AUTHOR
