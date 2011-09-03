@@ -12,5 +12,7 @@ Packages:
  - Gentoo Linux:
   * Joshua Saddler <nightmorph@gentoo.org>
   * maelnor
- - Fedora Linux
+ - Fedora Linux:
   * Filip Pytloun <filip.pytloun@stickfish.com>
+ - Debian:
+  * Julien Valroff <julien@debian.org>
