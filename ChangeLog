@@ -1,3 +1,7 @@
+2011-09-05: v1.0:
+- Fix bug with external viewer when mark_today is false
++ Add ability to show week numbers — show_week_numbers option
+
 2011-08-24: v0.9:
 - Fix license text not included in distribution
 - Fix last `=` was treated as separator of key/value in config, not the first
