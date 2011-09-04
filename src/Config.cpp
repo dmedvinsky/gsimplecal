@@ -57,6 +57,7 @@ void Config::getDefaults()
     mainwindow_skip_taskbar = true;
     mainwindow_position = GTK_WIN_POS_MOUSE;
     mark_today = true;
+    show_week_numbers = false;
 }
 
 bool Config::getFile()
@@ -145,6 +146,10 @@ void Config::addOption(string var, string val)
         }
     } else if (var == "external_viewer") {
         external_viewer = val;
+    } else if (var == "show_week_numbers") {
+        if (!fromString<bool>(show_week_numbers, val)) {
+            show_week_numbers = false;
+        }
     }
 }
 

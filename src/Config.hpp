@@ -28,6 +28,7 @@ public:
     vector<ClockInfo*> clocks;
     bool mark_today;
     string external_viewer;
+    bool show_week_numbers;
 
     bool mainwindow_decorated;
     bool mainwindow_keep_above;

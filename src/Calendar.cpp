@@ -35,11 +35,14 @@ void dayDoubleClickCb(GtkCalendar *calendar, gpointer cls)
 Calendar::Calendar()
 {
     widget = gtk_calendar_new();
-    gtk_calendar_set_display_options(GTK_CALENDAR(widget),
-            (GtkCalendarDisplayOptions)(GTK_CALENDAR_SHOW_HEADING +
-                                        GTK_CALENDAR_SHOW_DAY_NAMES));
 
     Config* config = Config::getInstance();
+    g_object_set(widget,
+                 "show-heading", true,
+                 "show-day-names", true,
+                 "show-details", false,
+                 "show-week-numbers", config->show_week_numbers,
+                 NULL);
     if (config->mark_today) {
         // Store today date to be able to mark it after month changes.
         gtk_calendar_get_date((GtkCalendar*)widget,
