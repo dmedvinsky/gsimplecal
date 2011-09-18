@@ -34,6 +34,7 @@ public:
     bool mainwindow_keep_above;
     bool mainwindow_sticky;
     bool mainwindow_skip_taskbar;
+    bool mainwindow_resizable;
     GtkWindowPosition mainwindow_position;
 
 private:

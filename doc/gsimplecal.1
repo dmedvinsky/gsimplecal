@@ -1,4 +1,4 @@
-.TH GSIMPLECAL 1 "2010-10-10"
+.TH GSIMPLECAL 1 "2011-09-17"
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
@@ -66,6 +66,8 @@ mainwindow_sticky = 0
 .br
 mainwindow_skip_taskbar = 1
 .br
+mainwindow_resizable = 0
+.br
 mainwindow_position = none
 .br
 clock_label = UTC
@@ -131,6 +133,10 @@ Tells your window manager to show gsimplecal on all desktops.
 \fBmainwindow_skip_taskbar\fP: 1 or 0, defaults to 1.
 Sets whether the main window should be shown in the task list by your panel or
 window manager.
+
+.TP 5
+\fBmainwindow_resizable\fP: 1 or 0, defaults to 1.
+Sets whether your window manager should allow the main window to be resized.
 
 .TP 5
 \fBmainwindow_position\fP: mouse|center|none, defaults to mouse.

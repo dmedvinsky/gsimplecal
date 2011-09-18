@@ -64,14 +64,13 @@ MainWindow::MainWindow()
     widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
     gtk_window_set_title(GTK_WINDOW(widget), "gsimplecal");
-    gtk_window_set_decorated(GTK_WINDOW(widget),
-                             config->mainwindow_decorated);
+    gtk_window_set_decorated(GTK_WINDOW(widget), config->mainwindow_decorated);
+    gtk_window_set_position(GTK_WINDOW(widget), config->mainwindow_position);
+    gtk_window_set_resizable(GTK_WINDOW(widget), config->mainwindow_resizable);
     gtk_window_set_keep_above(GTK_WINDOW(widget),
                               config->mainwindow_keep_above);
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(widget),
                                      config->mainwindow_skip_taskbar);
-    gtk_window_set_position(GTK_WINDOW(widget),
-                            config->mainwindow_position);
     if (config->mainwindow_sticky) {
         gtk_window_stick(GTK_WINDOW(widget));
     }

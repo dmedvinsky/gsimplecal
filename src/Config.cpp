@@ -140,6 +140,10 @@ void Config::addOption(string var, string val)
         } else {
             mainwindow_position = GTK_WIN_POS_NONE;
         }
+    } else if (var == "mainwindow_resizable") {
+        if (!fromString<bool>(mainwindow_resizable, val)) {
+            mainwindow_resizable = true;
+        }
     } else if (var == "mark_today") {
         if (!fromString<bool>(mark_today, val)) {
             mark_today = true;
