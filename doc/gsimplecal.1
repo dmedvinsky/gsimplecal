@@ -1,4 +1,4 @@
-.TH GSIMPLECAL 1 "2011-09-17"
+.TH GSIMPLECAL 1 "2011-09-19"
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
@@ -137,6 +137,9 @@ window manager.
 .TP 5
 \fBmainwindow_resizable\fP: 1 or 0, defaults to 1.
 Sets whether your window manager should allow the main window to be resized.
+If you are using a tiling window manager which supports floating windows,
+setting this options to 0 will most likely tell your WM not to tile the window.
+(Tested with XMonad and Awesome).
 
 .TP 5
 \fBmainwindow_position\fP: mouse|center|none, defaults to mouse.
