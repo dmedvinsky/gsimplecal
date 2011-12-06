@@ -20,6 +20,10 @@ use with tint2 panel to be launched upon clock click, but of course it will
 work without it, you can bind it to some hotkey in you window manager, for
 example.
 
+.PP
+Also, you may configure gsimplecal to display different world timezones clocks.
+See the \fICONFIGURATION\fP section to get to know how to.
+
 
 .SH COMMANDS AND OPTIONS
 .TP 5
@@ -42,14 +46,13 @@ running it stops, otherwise it starts.
 
 .SH CONFIGURATION
 .PP
-You may configure gsimplecal to display different world timezones clocks.
-To make it, you should create
+To configure the application you should manually create the file
 .nh
 \fB$XDG_CONFIG_HOME/gsimplecal/config\fP
-file (usually it will be
+(usually it will be
 .nh
 ~/.config/gsimplecal/config)
-with the following contents:
+with contents like this:
 
 .IP
 show_calendar = 1
