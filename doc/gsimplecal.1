@@ -1,16 +1,10 @@
-.TH GSIMPLECAL 1 "2011-09-19"
+.TH GSIMPLECAL 1 "2011-12-06"
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
 
 .SH SYNOPSIS
-.B gsimplecal
-.br
-.B gsimplecal
-next_month
-.br
-.B gsimplecal
-prev_month
+.B gsimplecal [-h|--help|-v|--version|next_month|prev_month]
 
 
 .SH DESCRIPTION
@@ -26,12 +20,24 @@ use with tint2 panel to be launched upon clock click, but of course it will
 work without it, you can bind it to some hotkey in you window manager, for
 example.
 
+
+.SH COMMANDS AND OPTIONS
+.TP 5
+\fB-v, --version\fP
+Print the program name and version to stdout, then exit with code 0.
+
+.TP 5
+\fB-h, --help\fP
+Print the short usage help to stderr, then exit with error code 2.
+
+.TP 5
+\fBprev_month, next_month\fP
+If the program is not running, simply run it.
+If the program is running, change currently displayed month.
+
 .PP
-When you provide one of the arguments —
-.B next_month
-or
-.B prev_month
-— instead of closing the running instance, the displaying month is changed.
+If no options and commands are given, the program is toggled, i.e. if it is
+running it stops, otherwise it starts.
 
 
 .SH CONFIGURATION
