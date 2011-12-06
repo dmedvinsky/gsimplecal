@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <gtk/gtk.h>
 
+#include "config.h"
 #include "MainWindow.hpp"
 #include "Config.hpp"
 #include "Unique.hpp"
@@ -35,8 +36,39 @@ static bool time_handler(GtkWidget *widget)
     return true;
 }
 
+static void version()
+{
+    std::cout << PACKAGE_STRING << std::endl;
+}
+
+static void usage(const char* const name)
+{
+    std::cerr << "usage: " << name << " [options] [commands]\n"
+        << "\noptions:\n"
+        << "\t-h, --help\n\t\tprint this help text and quit\n"
+        << "\t-v, --version\n\t\tprint version info and quit\n"
+        << "\ncommands:\n"
+        << "\tnext_month, prev_month\n"
+        << "\t\tif program is running, switch the displayed month\n"
+        << "\t\totherwise simply run the program\n"
+        << "\tif no command is given\n"
+        << "\t\tif program is not running, start it\n"
+        << "\t\totherwise stop it\n"
+        ;
+}
+
 int main(int argc, char *argv[])
 {
+    if (argc >= 2) {
+        if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
+            usage(argv[0]);
+            return 2;
+        } else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
+            version();
+            return 0;
+        }
+    }
+
     Unique* unique = new Unique();
     if (unique->isRunning()) {
         try {

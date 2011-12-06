@@ -8,6 +8,7 @@ AC_INIT([gsimplecal],
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_CONFIG_SRCDIR([src/gsimplecal.cpp])
+AC_CONFIG_HEADERS([src/config.h])
 
 # Checks for programs.
 AC_LANG([C++])

@@ -16,4 +16,7 @@ doc/Makefile
 doc/Makefile.in
 src/Makefile
 src/Makefile.in
+src/config.h
+src/config.h.in
+src/stamp-h1
 src/gsimplecal
