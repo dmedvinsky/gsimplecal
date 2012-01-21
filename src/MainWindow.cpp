@@ -60,12 +60,14 @@ bool goTodayCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
 MainWindow::MainWindow()
 {
     Config* config = Config::getInstance();
-
+    gint xpos, ypos;
     widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
     gtk_window_set_title(GTK_WINDOW(widget), "gsimplecal");
     gtk_window_set_decorated(GTK_WINDOW(widget), config->mainwindow_decorated);
     gtk_window_set_position(GTK_WINDOW(widget), config->mainwindow_position);
+    gtk_window_get_position(GTK_WINDOW(widget), &xpos, &ypos);
+    gtk_window_move(GTK_WINDOW(widget),  config->mainwindow_xoffset + xpos,  config->mainwindow_yoffset + ypos);
     gtk_window_set_resizable(GTK_WINDOW(widget), config->mainwindow_resizable);
     gtk_window_set_keep_above(GTK_WINDOW(widget),
                               config->mainwindow_keep_above);
