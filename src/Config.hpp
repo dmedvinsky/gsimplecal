@@ -36,6 +36,8 @@ public:
     bool mainwindow_skip_taskbar;
     bool mainwindow_resizable;
     GtkWindowPosition mainwindow_position;
+    int mainwindow_xoffset;
+    int mainwindow_yoffset;
 
 private:
     static Config* _instance;
