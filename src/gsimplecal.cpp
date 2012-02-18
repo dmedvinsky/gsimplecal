@@ -106,7 +106,9 @@ int main(int argc, char *argv[])
         g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
     }
     if (config->close_on_unfocus) {
-        g_signal_connect(G_OBJECT(main_window->getWindow()), "focus-out-event", GTK_SIGNAL_FUNC(gtk_widget_destroy), GTK_OBJECT(main_window->getWindow()));
+        g_signal_connect(G_OBJECT(main_window->getWindow()), "focus-out-event",
+                                  GTK_SIGNAL_FUNC(gtk_widget_destroy),
+                                  GTK_OBJECT(main_window->getWindow()));
     }
 
     gtk_main();
