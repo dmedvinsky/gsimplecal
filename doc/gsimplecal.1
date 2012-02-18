@@ -63,6 +63,8 @@ mark_today = 1
 .br
 show_week_numbers = 0
 .br
+close_on_unfocus = 0
+.br
 external_viewer = sunbird -showdate "%Y-%m-%d"
 .br
 clock_format = %a %d %b %H:%M
@@ -111,6 +113,10 @@ somehow, e.g. in bold print).
 .TP 5
 \fBshow_week_numbers\fP: 1 or 0, defaults to 0.
 Sets whether week numbers are shown in the calendar.
+
+.TP 5
+\fBclose_on_unfocus\fP: 1 or 0, defaults to 0.
+Sets whether the calendar will close if the window loses focus. Note that if mainwindow_skip_taskbar is set to 1 then the calendar window may not be given focus upon creation
 
 .TP 5
 \fBexternal_viewer\fP: string, defaults to empty string.

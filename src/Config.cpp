@@ -60,6 +60,7 @@ void Config::getDefaults()
     mainwindow_yoffset = 0;
     mark_today = true;
     show_week_numbers = false;
+    close_on_unfocus = false;
 }
 
 bool Config::getFile()
@@ -165,6 +166,10 @@ void Config::addOption(string var, string val)
     } else if (var == "show_week_numbers") {
         if (!fromString<bool>(show_week_numbers, val)) {
             show_week_numbers = false;
+        }
+    } else if (var == "close_on_unfocus") {
+        if (!fromString<bool>(close_on_unfocus, val)) {
+            close_on_unfocus = false;
         }
     }
 }

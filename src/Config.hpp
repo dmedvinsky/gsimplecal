@@ -29,6 +29,7 @@ public:
     bool mark_today;
     string external_viewer;
     bool show_week_numbers;
+    bool close_on_unfocus;
 
     bool mainwindow_decorated;
     bool mainwindow_keep_above;
