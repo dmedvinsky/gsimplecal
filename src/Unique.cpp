@@ -104,6 +104,7 @@ void Unique::kill(int signal_id)
 
 void Unique::stop()
 {
+    // Clean up semaphore, if exists.
     int semid = semget(semaphore_key, 1, 0660);
     if (semid != -1) {
         semctl(semid, 0, IPC_RMID, 0);
