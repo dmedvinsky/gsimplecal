@@ -8,6 +8,7 @@
 #include <signal.h>
 
 #include "Unique.hpp"
+#include "config.h"
 
 
 #if defined(_SEM_SEMUN_UNDEFINED)
@@ -22,11 +23,10 @@ Unique::Unique()
 {
     // Get path to the current binary.
     // It's a bit ugly, I guess, to rely on /proc, but it'll do for now.
-    char szTmp[32];
-    sprintf(szTmp, "/proc/%d/exe", getpid());
-
+    // Also, /proc has different layout on Linux and BSD, so there is ugly
+    // conditional compilation in configure script.
     char* filename = new char[PATH_MAX + 1];
-    int bytes = readlink(szTmp, filename,
+    int bytes = readlink(PROC_SELF_PATH, filename,
                          sizeof(*filename) * PATH_MAX);
     if (bytes > PATH_MAX - 1) {
         bytes = PATH_MAX;
