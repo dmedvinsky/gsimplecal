@@ -1,3 +1,8 @@
+2012-03-26: v1.5:
+- Fix compilation on BSD
+- Fix current executable path on BSD
+- Fix exception when gsimplecal gets a PID > SEMVMX
+
 2012-02-18: v1.4:
 + Add option to close gsimplecal when it loses focus
 
