@@ -1,6 +1,6 @@
 AC_PREREQ([2.65])
 AC_INIT([gsimplecal],
-        [1.4],
+        [1.5],
         [https://github.com/dmedvinsky/gsimplecal/issues],
         [gsimplecal],
         [https://github.com/dmedvinsky/gsimplecal])
