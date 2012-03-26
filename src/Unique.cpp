@@ -11,14 +11,6 @@
 #include "config.h"
 
 
-#if defined(_SEM_SEMUN_UNDEFINED)
-union semun
-{
-    int val;
-};
-#endif
-
-
 Unique::Unique()
 {
     // Get path to the current binary.
@@ -58,18 +50,16 @@ void Unique::start()
 {
     if (!isRunning()) {
         // Create semaphore; fail if already exists.
-        int semid = semget(semaphore_key, 1,
-                           IPC_CREAT | IPC_EXCL | 0660);
+        int semid = semget(semaphore_key, 1, IPC_CREAT | IPC_EXCL | 0660);
         if (semid == -1) {
             throw UniqueException("semget failed while creating semaphore");
         }
 
-        // Set initial semaphore value to the current pid, so we could use it to
-        // kill the process from the second instance.
-        union semun semopts;
-        semopts.val = getpid();
-        if (semctl(semid, 0, SETVAL, semopts) == -1) {
-            throw UniqueException("semctl (SETVAL) failed");
+        // Perform an operation on semaphore so that semctl(GETPID) returns
+        // current PID.
+        struct sembuf ops = {0, 1, 0};
+        if (semop(semid, &ops, 1) == -1) {
+            throw UniqueException("semop failed");
         }
     }
 }
@@ -92,9 +82,9 @@ void Unique::kill(int signal_id)
         }
 
         // Get the pid from semaphore value (stored before) to kill the process.
-        int pid = semctl(semid, 0, GETVAL, 0);
+        int pid = semctl(semid, 0, GETPID, 0);
         if (pid <= 0) {
-            throw UniqueException("semctl (GETVAL) failed");
+            throw UniqueException("semctl(GETPID) failed");
         }
         if (::kill(pid, signal_id)) {
             throw UniqueException("kill failed");
