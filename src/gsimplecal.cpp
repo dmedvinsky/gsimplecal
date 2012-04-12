@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <stdlib.h>
 
 #include <signal.h>
 #include <gtk/gtk.h>
@@ -95,13 +96,18 @@ int main(int argc, char *argv[])
     signal(SIGUSR2, &signal_handler);
     signal(SIGCHLD, SIG_IGN);
 
+    Config* config = Config::getInstance();
+    if (config->force_lang.length()) {
+        // Must be done before gtk_init call.
+        setenv("LANG", config->force_lang.c_str(), 1);
+    }
+
     gtk_init(&argc, &argv);
     main_window = new MainWindow();
 
     gtk_signal_connect(GTK_OBJECT(main_window->getWindow()), "destroy",
                        GTK_SIGNAL_FUNC(destroy), NULL);
 
-    Config* config = Config::getInstance();
     if (config->show_timezones) {
         g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
     }

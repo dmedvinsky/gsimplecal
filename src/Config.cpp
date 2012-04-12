@@ -171,6 +171,8 @@ void Config::addOption(string var, string val)
         if (!fromString<bool>(close_on_unfocus, val)) {
             close_on_unfocus = false;
         }
+    } else if (var == "force_lang") {
+        force_lang = val;
     }
 }
 

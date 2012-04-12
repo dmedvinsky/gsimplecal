@@ -69,6 +69,8 @@ external_viewer = sunbird \-showdate "%Y\-%m\-%d"
 .br
 clock_format = %a %d %b %H:%M
 .br
+force_lang = en_US.utf8
+.br
 mainwindow_decorated = 0
 .br
 mainwindow_keep_above = 1
@@ -136,6 +138,16 @@ please file a ticket (see \fIREPORTING BUGS\fP).
 .TP 5
 \fBclock_format\fP: string
 Sets the clocks format. Look \fIman strftime\fP for the possible formats.
+
+.TP 5
+\fBforce_lang\fP: string
+Overrides the \fILANG\fP environment variable, thus making it possible to
+change the first day of week, i.e. choose if Monday or Sunday goes first.
+Basically it's the same as running gsimplecal as
+
+    LANG=en_GB.utf8 gsimplecal
+
+Must be one of \fIlocale -a\fP output.
 
 .TP 5
 \fBmainwindow_decorated\fP: 1 or 0, defaults to 0.
