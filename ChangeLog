@@ -1,3 +1,6 @@
+2012-04-12: v1.6:
++ Add option to force LANG for changing weekdays order
+
 2012-03-26: v1.5:
 - Fix compilation on BSD
 - Fix current executable path on BSD
