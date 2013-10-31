@@ -8,7 +8,7 @@
 
 Timezones::Timezones()
 {
-    widget = gtk_vbox_new(false, 0);
+    widget = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     Config* config = Config::getInstance();
     for (unsigned int clock_num = 0; clock_num < config->clocks.size(); clock_num++) {

@@ -14,7 +14,7 @@ Clock::Clock(const string& label, const string& timezone)
 {
     this->timezone = timezone;
 
-    widget = gtk_hbox_new(false, 0);
+    widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
     label_label = gtk_label_new(label.c_str());
     time_label = gtk_label_new(timezone.c_str());

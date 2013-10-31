@@ -1,5 +1,5 @@
-AM_CPPFLAGS = @GTK2_CFLAGS@
-LIBS = @GTK2_LIBS@
+AM_CPPFLAGS = @GTK3_CFLAGS@
+LIBS = @GTK3_LIBS@
 
 bin_PROGRAMS = gsimplecal
 gsimplecal_SOURCES = \

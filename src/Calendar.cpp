@@ -48,11 +48,11 @@ Calendar::Calendar()
         gtk_calendar_get_date((GtkCalendar*)widget,
                               &today_year, &today_month, &today_day);
         markToday();
-        gtk_signal_connect(GTK_OBJECT(widget), "month-changed",
-                           GTK_SIGNAL_FUNC(monthChangedCb), (gpointer)this);
+        g_signal_connect(widget, "month-changed",
+                           GCallback(monthChangedCb), (gpointer)this);
     }
-    gtk_signal_connect(GTK_OBJECT(widget), "day-selected-double-click",
-                       GTK_SIGNAL_FUNC(dayDoubleClickCb), (gpointer)this);
+    g_signal_connect(widget, "day-selected-double-click",
+                       GCallback(dayDoubleClickCb), (gpointer)this);
 
     gtk_widget_show(widget);
 }
