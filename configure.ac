@@ -10,6 +10,12 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_SRCDIR([src/gsimplecal.cpp])
 AC_CONFIG_HEADERS([src/config.h])
 
+# Support silent build rules.
+# Disable by either passing `--disable-silent-rules` to `configure`
+# or passing V=1 to `make`.
+AM_SILENT_RULES([yes])
+
+
 # Checks for programs.
 AC_LANG([C++])
 AC_PROG_CXX
