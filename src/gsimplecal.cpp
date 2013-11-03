@@ -106,15 +106,15 @@ int main(int argc, char *argv[])
     main_window = new MainWindow();
 
     g_signal_connect(main_window->getWindow(), "destroy",
-                       GCallback(destroy), NULL);
+                     GCallback(destroy), NULL);
 
     if (config->show_timezones) {
         g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
     }
     if (config->close_on_unfocus) {
         g_signal_connect(main_window->getWindow(), "focus-out-event",
-                                  GCallback(gtk_widget_destroy),
-                                  main_window->getWindow());
+                         GCallback(gtk_widget_destroy),
+                         main_window->getWindow());
     }
 
     gtk_main();

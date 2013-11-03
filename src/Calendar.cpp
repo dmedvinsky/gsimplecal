@@ -49,10 +49,10 @@ Calendar::Calendar()
                               &today_year, &today_month, &today_day);
         markToday();
         g_signal_connect(widget, "month-changed",
-                           GCallback(monthChangedCb), (gpointer)this);
+                         GCallback(monthChangedCb), (gpointer)this);
     }
     g_signal_connect(widget, "day-selected-double-click",
-                       GCallback(dayDoubleClickCb), (gpointer)this);
+                     GCallback(dayDoubleClickCb), (gpointer)this);
 
     gtk_widget_show(widget);
 }

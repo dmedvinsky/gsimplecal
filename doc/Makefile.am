@@ -1,4 +1,3 @@
 man1_MANS = $(PACKAGE_NAME).1
 
 EXTRA_DIST = $(man1_MANS)
-
