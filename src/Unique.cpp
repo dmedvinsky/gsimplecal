@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <limits.h>
@@ -11,19 +12,15 @@
 #include "config.h"
 
 
-Unique::Unique()
+Unique::Unique(const char* const cmd)
 {
-    // Get path to the current binary.
-    // It's a bit ugly, I guess, to rely on /proc, but it'll do for now.
-    // Also, /proc has different layout on Linux and BSD, so there is ugly
-    // conditional compilation in configure script.
     char* filename = new char[PATH_MAX + 1];
-    int bytes = readlink(PROC_SELF_PATH, filename,
-                         sizeof(*filename) * PATH_MAX);
-    if (bytes > PATH_MAX - 1) {
-        bytes = PATH_MAX;
-    }
-    filename[bytes] = '\0';
+#if HAVE_STRLCPY
+    strlcpy(filename, cmd, PATH_MAX);
+#else
+    strncpy(filename, cmd, PATH_MAX);
+    filename[PATH_MAX] = '\0';
+#endif
 
     // Get unique key for semaphore.
     semaphore_key = ftok(filename, 1);

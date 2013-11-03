@@ -25,7 +25,7 @@ private:
 class Unique
 {
 public:
-    Unique();
+    Unique(const char* const cmd);
     ~Unique();
 
     bool isRunning();

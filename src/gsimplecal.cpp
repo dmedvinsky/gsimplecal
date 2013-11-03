@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    Unique* unique = new Unique();
+    Unique* unique = new Unique(argv[0]);
     if (unique->isRunning()) {
         try {
             if (argc >= 2 && strcmp(argv[1], "next_month") == 0) {

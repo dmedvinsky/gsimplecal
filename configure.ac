@@ -63,35 +63,24 @@ AC_CHECK_HEADERS([iostream \
                   signal.h \
                   limits.h])
 
+
 # Checks for typedefs, structures, and compiler characteristics.
+
 
 # Checks for library functions.
 AC_CHECK_FUNCS([atexit \
+                execl \
+                fork \
+                ftok \
                 gettimeofday \
+                kill \
+                readlink \
+                semctl \
+                semget \
                 setenv \
                 signal \
-                kill \
-                semget \
-                semctl \
-                ftok \
-                readlink \
-                fork \
-                execl])
+                strlcpy])
 
-# Checks for host
-AC_CANONICAL_HOST
-case $host_os in
-    *linux* | *Linux*)
-        AC_DEFINE([PROC_SELF_PATH], ["/proc/self/exe"], [Path to symlink in proc that leads to current executable.])
-        ;;
-    *bsd* | *BSD*)
-        AC_DEFINE([PROC_SELF_PATH], ["/proc/curproc/file"], [Path to symlink in proc that leads to current executable.])
-        ;;
-    *)
-        AC_MSG_ERROR([Your platform $host_os is not currently supported.
-                      Please, report this to the issue tracker.])
-        ;;
-esac
 
 # Flags
 AM_CPPFLAGS="-Wall"
