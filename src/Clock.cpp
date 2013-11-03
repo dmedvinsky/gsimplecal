@@ -6,6 +6,7 @@
 
 #include "Clock.hpp"
 #include "Config.hpp"
+#include "config.h"
 
 using namespace std;
 
@@ -14,7 +15,11 @@ Clock::Clock(const string& label, const string& timezone)
 {
     this->timezone = timezone;
 
+#if HAVE_GTK_BOX_NEW
     widget = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+#else
+    widget = gtk_hbox_new(false, 0);
+#endif
 
     label_label = gtk_label_new(label.c_str());
     time_label = gtk_label_new(timezone.c_str());

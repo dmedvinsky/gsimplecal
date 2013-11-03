@@ -5,6 +5,7 @@
 #include "Config.hpp"
 #include "Calendar.hpp"
 #include "Timezones.hpp"
+#include "config.h"
 
 
 bool closeCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
@@ -78,7 +79,11 @@ MainWindow::MainWindow()
     }
 
     // Create box for child items
+#if HAVE_GTK_BOX_NEW
     children_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+#else
+    children_box = gtk_vbox_new(false, 10);
+#endif
 
     calendar = NULL;
     if (config->show_calendar) {

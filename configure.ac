@@ -22,10 +22,31 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 PKG_PROG_PKG_CONFIG
 
+
 # Checks for libraries.
-PKG_CHECK_MODULES([GTK3], [gtk+-3.0])
-AC_SUBST(GTK3_CFLAGS)
-AC_SUBST(GTK3_LIBS)
+
+# GTK
+AC_ARG_ENABLE(gtk2,
+    AS_HELP_STRING([--enable-gtk2],
+                   [Build against GTK2. By default gsimplecal uses GTK3, but if
+                    you set this flag, it will use GTK2 instead.]),
+    [enable_gtk2=$enableval],
+    [enable_gtk2=no]
+)
+AM_CONDITIONAL([ENABLE_GTK2], [test x"$enable_gtk2" = x"yes"])
+AM_COND_IF([ENABLE_GTK2],
+           [GTK_VERSION=gtk+-2.0],
+           [GTK_VERSION=gtk+-3.0])
+
+AC_DEFINE([HAVE_GTK_BOX_NEW], [], [Have gtk_box_new function])
+AM_COND_IF([ENABLE_GTK2],
+           [AC_DEFINE([HAVE_GTK_BOX_NEW], [0], [])],
+           [AC_DEFINE([HAVE_GTK_BOX_NEW], [1], [])])
+
+PKG_CHECK_MODULES(GTK, [$GTK_VERSION])
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(GTK_LIBS)
+
 
 # Checks for header files.
 AC_CHECK_HEADERS([iostream \
@@ -68,7 +89,7 @@ case $host_os in
         ;;
     *)
         AC_MSG_ERROR([Your platform $host_os is not currently supported.
-                       Please, report this to the issue tracker.])
+                      Please, report this to the issue tracker.])
         ;;
 esac
 
