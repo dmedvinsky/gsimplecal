@@ -1,3 +1,8 @@
+2013-11-11: v2.0:
++ Use GTK3 by default (pass `--enable-gtk2` to `./configure` to use GTK2)
++ Try system-wide config if user config not present
+* Do not necessarily require procfs to be mounted
+
 2012-04-12: v1.6:
 + Add option to force LANG for changing weekdays order
 
