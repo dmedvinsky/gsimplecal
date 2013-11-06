@@ -1,4 +1,5 @@
-.TH GSIMPLECAL 1 "2012\-03\-26"
+.TH GSIMPLECAL 1 "2013\-11\-11"
+
 .SH NAME
 gsimplecal \- lightweight calendar applet
 
@@ -15,14 +16,19 @@ command.
 .PP
 .B gsimplecal
 is a lightweight calendar applet. When it is started, it first shows up, when
-you run it again, it closes the running instance. It was intentionally made for
-use with tint2 panel to be launched upon clock click, but of course it will
-work without it, you can bind it to some hotkey in you window manager, for
-example.
+you run it again, it closes the running instance, thus making it very easy to
+integrate anywhere without the need to make some wrapper scripts.
 
 .PP
-Also, you may configure gsimplecal to display different world timezones clocks.
-See the \fICONFIGURATION\fP section to get to know how to.
+It was intentionally made for use with tint2 panel to be launched upon clock
+click, but of course it will work with any other panel, or no panel at all. For
+example you can bind it to some hotkey in you window manager config.
+
+.PP
+You may also configure
+.B gsimplecal
+to display different world time zones clocks. See the \fICONFIGURATION\fP
+section for details.
 
 
 .SH COMMANDS AND OPTIONS
@@ -46,13 +52,21 @@ running it stops, otherwise it starts.
 
 .SH CONFIGURATION
 .PP
-To configure the application you should manually create the file
+To configure the application you should manually create the configuration file.
+The file is first searched in
 .nh
-\fB$XDG_CONFIG_HOME/gsimplecal/config\fP
-(usually it will be
+$XDG_CONFIG_HOME/gsimplecal/config.
+Usually that will be
 .nh
-~/.config/gsimplecal/config)
-with contents like this:
+\fB~/.config/gsimplecal/config\fP.
+
+If found, it is used. If not found, system-wide configuration is searched in
+all the
+.nh
+\fB$XDG_CONFIG_DIRS/gsimplecal/config\fP
+locations.
+
+.SS Sample config file
 
 .IP
 show_calendar = 1
@@ -95,6 +109,8 @@ clock_label = Local
 .br
 clock_tz = 
 
+.SS Config options description
+
 .PP
 The options are pretty self explanatory, but here is detailed description:
 
@@ -104,7 +120,7 @@ Sets whether the calendar should be shown. Most users want this option to be 1.
 
 .TP 5
 \fBshow_timezones\fP: 1 or 0, defaults to 0.
-Sets whether the different timezone clocks should be shown.
+Sets whether the different time zone clocks should be shown.
 
 .TP 5
 \fBmark_today\fP: 1 or 0, defaults to 1.
@@ -204,32 +220,41 @@ it'll move the window by that number of pixels.
 These two options should go in pairs and \fBmust\fP be in the order given.
 .br
 Each pair creates new clock. The clock_label variable sets the string to be
-displayed near the clock, the clock_tz sets the timezone.
+displayed near the clock, the clock_tz sets the time zone.
 .br
 If you omit the value for clock_tz, local time will be shown.
 .br
-For a list of timezones see \fIman timezone\fP, or \fIls /usr/share/zoneinfo\fP
+For a list of time zones see \fIman timezone\fP, or \fIls /usr/share/zoneinfo\fP
 
 
 .SH KEYBOARD ACCELERATORS
 .PP
-You may use the following keyboard accelerators while gsimplecal window has a focus:
+You may use the following keyboard accelerators while gsimplecal window has a
+focus (not yet configurable):
 
-.IP
-Escape, Ctrl+w, Ctrl+q: close the window
-.br
-j: switch to the next month
-.br
-k: switch to the previous month
-.br
-J: jump one year forward
-.br
-K: jump one year backward
-.br
-g, Home: jump to the current date
+.TP 5
+\fBEscape\fP, \fBCtrl+w\fP, \fBCtrl+q\fP
+Close the window.
 
-.PP
-These are not yet configurable, but I'm working on it.
+.TP 5
+\fBj\fP
+Switch to the next month.
+
+.TP 5
+\fBk\fP
+Switch to the previous month.
+
+.TP 5
+\fBJ\fP
+Jump one year forward.
+
+.TP 5
+\fBK\fP
+Jump one year backward.
+
+.TP 5
+\fBg\fP, \fBHome\fP
+Jump to the current date.
 
 
 .SH REPORTING BUGS
