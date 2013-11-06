@@ -70,7 +70,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    Unique* unique = new Unique(argv[0]);
+    Config* config = Config::getInstance();
+
+    Unique* unique = new Unique(config->getPath());
     if (unique->isRunning()) {
         try {
             if (argc >= 2 && strcmp(argv[1], "next_month") == 0) {
@@ -96,7 +98,6 @@ int main(int argc, char *argv[])
     signal(SIGUSR2, &signal_handler);
     signal(SIGCHLD, SIG_IGN);
 
-    Config* config = Config::getInstance();
     if (config->force_lang.length()) {
         // Must be done before gtk_init call.
         setenv("LANG", config->force_lang.c_str(), 1);

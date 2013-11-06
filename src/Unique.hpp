@@ -25,7 +25,7 @@ private:
 class Unique
 {
 public:
-    Unique(const char* const cmd);
+    Unique(const char* const path);
     ~Unique();
 
     bool isRunning();
@@ -38,6 +38,9 @@ public:
 protected:
     key_t semaphore_key;
 
+private:
+    void getPathnameFromFile(const char *const path, char* pathname);
+    void getPathnameFromExe(char* pathname);
 };
 
 #endif

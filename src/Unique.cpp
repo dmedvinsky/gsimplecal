@@ -1,33 +1,31 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/ipc.h>
 #include <limits.h>
-#include <sys/sem.h>
 #include <signal.h>
+#include <sys/sem.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
 
 #include "Unique.hpp"
 #include "config.h"
 
 
-Unique::Unique(const char* const cmd)
+Unique::Unique(const char *const path)
 {
-    char* filename = new char[PATH_MAX + 1];
-#if HAVE_STRLCPY
-    strlcpy(filename, cmd, PATH_MAX);
-#else
-    strncpy(filename, cmd, PATH_MAX);
-    filename[PATH_MAX] = '\0';
-#endif
+    char pathname[PATH_MAX + 1];
+
+    if (path) {
+        getPathnameFromFile(path, *&pathname);
+    } else {
+        getPathnameFromExe(*&pathname);
+    }
 
     // Get unique key for semaphore.
-    semaphore_key = ftok(filename, 1);
+    semaphore_key = ftok(pathname, 1);
     if (semaphore_key == -1) {
         throw new UniqueException("ftok failed");
     }
-    delete[] filename;
 }
 
 Unique::~Unique()
@@ -96,4 +94,51 @@ void Unique::stop()
     if (semid != -1) {
         semctl(semid, 0, IPC_RMID, 0);
     }
+}
+
+void Unique::getPathnameFromFile(const char *const path, char* pathname)
+{
+#if HAVE_STRLCPY
+    strlcpy(pathname, path, PATH_MAX + 1);
+#else
+    strncpy(pathname, path, PATH_MAX);
+    pathname[PATH_MAX] = '\0';
+#endif
+}
+
+void Unique::getPathnameFromExe(char* pathname)
+{
+#if HAVE_GETEXECNAME && HAVE_STRLCPY
+    // Try getexecname (Solaris).
+    const char* execname = getexecname();
+    strlcpy(pathname, execname, PATH_MAX + 1);
+#elif HAVE_SYSCTL && defined(CTL_KERN) && defined(KERN_PROC) && defined(KERN_PROC_PATHNAME)
+    // Try sysctl call (FreeBSD).
+    int mib[4];
+    mib[0] = CTL_KERN;
+    mib[1] = KERN_PROC;
+    mib[2] = KERN_PROC_PATHNAME;
+    mib[3] = -1;
+    size_t cb = PATH_MAX;
+    sysctl(mib, 4, pathname, &cb, NULL, 0);
+#else
+    // Try reading procfs links.
+    const char *const paths[] = {
+        "/proc/self/exe",     // Linux
+        "/proc/curproc/exe",  // NetBSD
+        "/proc/curproc/file", // FreeBSD with procfs
+        NULL
+    };
+    for (const char *const *path = paths; *path; path++) {
+        pathname[0] = 0;
+        int bytes = readlink(*path, pathname, sizeof(*pathname) * PATH_MAX);
+        if (bytes > 0) {
+            if (bytes > PATH_MAX - 1) {
+                bytes = PATH_MAX;
+            }
+            pathname[bytes] = '\0';
+            break;
+        }
+    }
+#endif
 }

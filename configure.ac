@@ -60,6 +60,7 @@ AC_CHECK_HEADERS([iostream \
                   sys/types.h \
                   sys/ipc.h \
                   sys/sem.h \
+                  sys/sysctl.h \
                   signal.h \
                   limits.h])
 
@@ -72,6 +73,7 @@ AC_CHECK_FUNCS([atexit \
                 execl \
                 fork \
                 ftok \
+                getexecname \
                 gettimeofday \
                 kill \
                 readlink \
@@ -79,7 +81,8 @@ AC_CHECK_FUNCS([atexit \
                 semget \
                 setenv \
                 signal \
-                strlcpy])
+                strlcpy \
+                sysctl])
 
 
 # Flags
