@@ -32,14 +32,18 @@ void Config::Destroy()
 
 Config::Config()
 {
+    path = NULL;
     getDefaults();
-    if (getFile()) {
+    if (getPath()) {
         readFile();
     }
 }
 
 Config::~Config()
 {
+    if (path) {
+        g_free(path);
+    }
     for (unsigned int i = 0; i < clocks.size(); i++) {
         delete clocks[i];
     }
@@ -63,27 +67,43 @@ void Config::getDefaults()
     close_on_unfocus = false;
 }
 
-bool Config::getFile()
+bool Config::getPath()
 {
-    // use XDG config dir (~/.config/ usually)
-    char *path_to_config;
-    path_to_config = g_build_filename(g_get_user_config_dir(),
-                                      "gsimplecal", "config", NULL);
-    if (g_file_test(path_to_config, G_FILE_TEST_EXISTS)) {
-        file.open(path_to_config, ios::in);
+    // First try XDG_CONFIG_HOME (usually `~/.config`).
+    const gchar *const user_config_dir = g_get_user_config_dir();
+    path = g_build_filename(user_config_dir, "gsimplecal", "config", NULL);
+    if (g_file_test(path, G_FILE_TEST_EXISTS)) {
+        return true;
     }
-    g_free(path_to_config);
-    return file.is_open();
+    g_free(path);
+    path = NULL;
+
+    // Then try XDG_CONFIG_DIRS (or `/etc/xdg`).
+    const gchar *const *const system_config_dirs = g_get_system_config_dirs();
+    for (const gchar *const *dir = system_config_dirs; dir && *dir; dir++) {
+        path = g_build_filename(*dir, "gsimplecal", "config", NULL);
+        if (g_file_test(path, G_FILE_TEST_EXISTS)) {
+            return true;
+        }
+        g_free(path);
+        path = NULL;
+    }
+
+    // Otherwise, bail.
+    return false;
 }
 
 void Config::readFile()
 {
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        return;
+    }
     string line;
     while (!file.eof()) {
         getline(file, line);
         parseLine(line);
     }
-    file.close();
 }
 
 void Config::parseLine(string line)

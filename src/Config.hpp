@@ -48,14 +48,14 @@ private:
     template <class T> bool fromString(T& t, const string& s);
     string strip(string const& str);
 
-    std::ifstream file;
+    gchar* path;
 
 protected:
     explicit Config();
     ~Config();
 
     void getDefaults();
-    bool getFile();
+    bool getPath();
     void readFile();
     void parseLine(string line);
     void addOption(string var, string val);
