@@ -1,5 +1,4 @@
 #include <string.h>
-#include <stdio.h>
 #include <sys/time.h>
 
 #include <gtk/gtk.h>

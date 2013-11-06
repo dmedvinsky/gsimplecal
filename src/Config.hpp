@@ -1,8 +1,6 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
-#include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
 
