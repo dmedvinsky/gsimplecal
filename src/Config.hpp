@@ -19,6 +19,8 @@ class Config
 public:
     static Config* getInstance();
 
+    const gchar *const getPath();
+
     // options
     bool show_calendar;
     bool show_timezones;
@@ -52,8 +54,8 @@ protected:
     explicit Config();
     ~Config();
 
-    void getDefaults();
-    bool getPath();
+    void setDefaults();
+    bool findPath();
     void readFile();
     void parseLine(string line);
     void addOption(string var, string val);

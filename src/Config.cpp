@@ -32,8 +32,8 @@ void Config::Destroy()
 Config::Config()
 {
     path = NULL;
-    getDefaults();
-    if (getPath()) {
+    setDefaults();
+    if (findPath()) {
         readFile();
     }
 }
@@ -48,8 +48,12 @@ Config::~Config()
     }
 }
 
+const gchar *const Config::getPath()
+{
+    return path;
+}
 
-void Config::getDefaults()
+void Config::setDefaults()
 {
     show_calendar = true;
     show_timezones = false;
@@ -66,7 +70,7 @@ void Config::getDefaults()
     close_on_unfocus = false;
 }
 
-bool Config::getPath()
+bool Config::findPath()
 {
     // First try XDG_CONFIG_HOME (usually `~/.config`).
     const gchar *const user_config_dir = g_get_user_config_dir();
