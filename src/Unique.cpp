@@ -16,9 +16,9 @@ Unique::Unique(const char *const path)
     char pathname[PATH_MAX + 1];
 
     if (path) {
-        getPathnameFromFile(path, *&pathname);
+        getPathnameFromFile(path, pathname);
     } else {
-        getPathnameFromExe(*&pathname);
+        getPathnameFromExe(pathname);
     }
 
     // Get unique key for semaphore.
