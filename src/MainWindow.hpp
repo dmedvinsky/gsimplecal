@@ -23,6 +23,10 @@ public:
     void nextYear();
     void prevYear();
     void goToday();
+    void goLeft();
+    void goDown();
+    void goUp();
+    void goRight();
 
     Calendar* calendar;
 

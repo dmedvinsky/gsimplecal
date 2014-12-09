@@ -56,6 +56,38 @@ bool goTodayCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     }
     return true;
 }
+bool goLeftCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                  GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->goLeft();
+    }
+    return true;
+}
+bool goDownCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                  GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->goDown();
+    }
+    return true;
+}
+bool goUpCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                  GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->goUp();
+    }
+    return true;
+}
+bool goRightCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                  GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->goRight();
+    }
+    return true;
+}
 
 
 MainWindow::MainWindow()
@@ -108,13 +140,17 @@ MainWindow::MainWindow()
     Shortcut keys[] = {{GDK_KEY_Escape, 0, closeCallback},
                        {GDK_KEY_q, GDK_CONTROL_MASK, closeCallback},
                        {GDK_KEY_w, GDK_CONTROL_MASK, closeCallback},
-                       {GDK_KEY_j, GDK_SHIFT_MASK, nextYearCallback},
-                       {GDK_KEY_k, GDK_SHIFT_MASK, prevYearCallback},
-                       {GDK_KEY_j, 0, nextMonthCallback},
-                       {GDK_KEY_k, 0, prevMonthCallback},
+                       {GDK_KEY_n, GDK_SHIFT_MASK, nextYearCallback},
+                       {GDK_KEY_p, GDK_SHIFT_MASK, prevYearCallback},
+                       {GDK_KEY_n, 0, nextMonthCallback},
+                       {GDK_KEY_p, 0, prevMonthCallback},
+                       {GDK_KEY_h, 0, goLeftCallback},
+                       {GDK_KEY_j, 0, goDownCallback},
+                       {GDK_KEY_k, 0, goUpCallback},
+                       {GDK_KEY_l, 0, goRightCallback},
                        {GDK_KEY_g, 0, goTodayCallback},
                        {GDK_KEY_Home, 0, goTodayCallback}};
-    for (int key = 0; key < 9; key++) {
+    for (int key = 0; key < sizeof(keys) / sizeof(Shortcut); key++) {
         closure = g_cclosure_new(G_CALLBACK(keys[key].func), (gpointer)this, NULL);
         gtk_accel_group_connect(accelerators, keys[key].key,
                                 (GdkModifierType)keys[key].modifier,
@@ -174,4 +210,21 @@ void MainWindow::nextYear()
 void MainWindow::prevYear()
 {
     calendar->prevYear();
+}
+
+void MainWindow::goLeft()
+{
+    calendar->goLeft();
+}
+void MainWindow::goDown()
+{
+    calendar->goDown();
+}
+void MainWindow::goUp()
+{
+    calendar->goUp();
+}
+void MainWindow::goRight()
+{
+    calendar->goRight();
 }

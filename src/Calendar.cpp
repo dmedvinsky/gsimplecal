@@ -63,26 +63,55 @@ Calendar::~Calendar()
 
 void Calendar::nextYear()
 {
-    _change(1, 0);
+    _change(1, 0, 0);
 }
 void Calendar::prevYear()
 {
-    _change(-1, 0);
+    _change(-1, 0, 0);
 }
 
 void Calendar::nextMonth()
 {
-    _change(0, 1);
+    _change(0, 1, 0);
 }
 void Calendar::prevMonth()
 {
-    _change(0, -1);
+    _change(0, -1, 0);
 }
 
-void Calendar::_change(int year_offset, int month_offset)
+void Calendar::goLeft()
 {
-    int year, month;
-    gtk_calendar_get_date((GtkCalendar*)widget, (guint*)&year, (guint*)&month, NULL);
+    _change(0, 0, -1);
+}
+void Calendar::goDown()
+{
+    _change(0, 0, 7);
+}
+void Calendar::goUp()
+{
+    _change(0, 0, -7);
+}
+void Calendar::goRight()
+{
+    _change(0, 0, 1);
+}
+
+void Calendar::_change(int year_offset, int month_offset, int day_offset)
+{
+    int year, month, day;
+    gtk_calendar_get_date((GtkCalendar*)widget,
+                          (guint*)&year, (guint*)&month, (guint*)&day);
+
+    unsigned int n_days = _n_days(year, month);
+    day += day_offset;
+    if (day < 1) {
+        day += _n_days(year, month - 1);
+        month_offset--;
+    } else if (day > n_days) {
+        day -= n_days;
+        month_offset++;
+    }
+
     month += month_offset;
     if (month > 11) {
         month = 0;
@@ -91,8 +120,27 @@ void Calendar::_change(int year_offset, int month_offset)
         month = 11;
         year_offset--;
     }
+
     year += year_offset;
+
     gtk_calendar_select_month((GtkCalendar*)widget, (guint)month, (guint)year);
+    gtk_calendar_select_day((GtkCalendar*)widget, day);
+}
+
+unsigned int Calendar::_n_days(unsigned int year, unsigned int month)
+{
+    if (month == 3 || month == 5 || month == 8 || month == 10) {
+        return 30;
+    } else if (month == 1) {
+        bool leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        if (leap) {
+            return 29;
+        } else {
+            return 28;
+        }
+    } else {
+        return 31;
+    }
 }
 
 bool Calendar::markToday()
