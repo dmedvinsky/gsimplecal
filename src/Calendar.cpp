@@ -42,10 +42,10 @@ Calendar::Calendar()
                  "show-details", false,
                  "show-week-numbers", config->show_week_numbers,
                  NULL);
+    // Store today date to be able to jump to it.
+    gtk_calendar_get_date((GtkCalendar*)widget,
+                          &today_year, &today_month, &today_day);
     if (config->mark_today) {
-        // Store today date to be able to mark it after month changes.
-        gtk_calendar_get_date((GtkCalendar*)widget,
-                              &today_year, &today_month, &today_day);
         markToday();
         g_signal_connect(widget, "month-changed",
                          GCallback(monthChangedCb), (gpointer)this);

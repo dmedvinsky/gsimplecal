@@ -1,3 +1,6 @@
+2014-12-12: v2.1:
+- Fix jumping to today when mark_today option is false
+
 2013-11-11: v2.0:
 + Use GTK3 by default (pass `--enable-gtk2` to `./configure` to use GTK2)
 + Try system-wide config if user config not present
