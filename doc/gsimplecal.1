@@ -108,6 +108,18 @@ clock_tz = :UTC
 clock_label = Local
 .br
 clock_tz = 
+.br
+clock_label = BST
+.br
+clock_tz = :Europe/London
+.br
+clock_label = EDT
+.br
+clock_tz = :US/Eastern
+.br
+clock_label = CDT
+.br
+clock_tz = :US/Central
 
 .SS Config options description
 
@@ -224,7 +236,11 @@ displayed near the clock, the clock_tz sets the time zone.
 .br
 If you omit the value for clock_tz, local time will be shown.
 .br
-For a list of time zones see \fIman timezone\fP, or \fIls /usr/share/zoneinfo\fP
+For how to specify different time zone see \fIman timezone\fP. Usually it is
+a string in the format ":{Area}/{Location}", but really is a colon followed by
+the relative path to file that stores timezone information. Usually the
+directory containing the files is \fI/usr/share/zoneinfo\fP, so just look at
+the directory listing and pick the files you need.
 
 
 .SH KEYBOARD ACCELERATORS
