@@ -4,7 +4,11 @@
 #include <limits.h>
 #include <signal.h>
 #include <sys/sem.h>
+
+#if HAVE_SYSCTL
 #include <sys/sysctl.h>
+#endif
+
 #include <sys/types.h>
 
 #include "Unique.hpp"
