@@ -110,7 +110,12 @@ int main(int argc, char *argv[])
                      GCallback(destroy), NULL);
 
     if (config->show_timezones) {
-        g_timeout_add(30000, (GSourceFunc)time_handler, NULL);
+        // Only update as often if seconds are rendered.
+        unsigned int interval = 1000;  // msec
+        if (config->clock_format.find("%S") == std::string::npos) {
+            interval = 30 * 1000;
+        }
+        g_timeout_add(interval, (GSourceFunc)time_handler, NULL);
     }
     if (config->close_on_unfocus) {
         g_signal_connect(main_window->getWindow(), "focus-out-event",
