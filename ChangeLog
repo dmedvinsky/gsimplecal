@@ -1,3 +1,7 @@
+2021-02-17: v2.2:
+- Fix building when sysctl.h does not exist
+* Update clock each second if seconds are rendered
+
 2014-12-12: v2.1:
 - Fix jumping to today when mark_today option is false
 + Vi-style dates navigation
