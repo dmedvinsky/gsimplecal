@@ -98,9 +98,6 @@ MainWindow::MainWindow()
 
     gtk_window_set_title(GTK_WINDOW(widget), "gsimplecal");
     gtk_window_set_decorated(GTK_WINDOW(widget), config->mainwindow_decorated);
-    gtk_window_set_position(GTK_WINDOW(widget), config->mainwindow_position);
-    gtk_window_get_position(GTK_WINDOW(widget), &xpos, &ypos);
-    gtk_window_move(GTK_WINDOW(widget),  config->mainwindow_xoffset + xpos,  config->mainwindow_yoffset + ypos);
     gtk_window_set_resizable(GTK_WINDOW(widget), config->mainwindow_resizable);
     gtk_window_set_keep_above(GTK_WINDOW(widget),
                               config->mainwindow_keep_above);
@@ -131,6 +128,37 @@ MainWindow::MainWindow()
 
     gtk_container_add(GTK_CONTAINER(widget), children_box);
     gtk_widget_show(children_box);
+
+    if (config->mainwindow_gravity) {
+        gtk_window_get_size(GTK_WINDOW(widget), &xpos, &ypos);
+        switch(config->mainwindow_gravity) {
+            case GDK_GRAVITY_NORTH_WEST:
+                xpos = config->mainwindow_xoffset;
+                ypos = config->mainwindow_yoffset;
+                break;
+            case GDK_GRAVITY_NORTH_EAST:
+                xpos = gdk_screen_width() - xpos - config->mainwindow_xoffset;
+                ypos = config->mainwindow_yoffset;
+                break;
+            case GDK_GRAVITY_SOUTH_WEST:
+                xpos = config->mainwindow_xoffset;
+                ypos = gdk_screen_height() - ypos - config->mainwindow_yoffset;
+                break;
+            case GDK_GRAVITY_SOUTH_EAST:
+                xpos = gdk_screen_width() - xpos - config->mainwindow_xoffset;
+                ypos = gdk_screen_height() - ypos - config->mainwindow_yoffset;
+                break;
+        }
+        gtk_window_set_gravity(GTK_WINDOW(widget), config->mainwindow_gravity);
+        gtk_window_move(GTK_WINDOW(widget), xpos, ypos);
+    } else {
+        gtk_window_set_position(GTK_WINDOW(widget), config->mainwindow_position);
+        gtk_window_get_position(GTK_WINDOW(widget), &xpos, &ypos);
+        gtk_window_move(GTK_WINDOW(widget),
+                        config->mainwindow_xoffset + xpos,
+                        config->mainwindow_yoffset + ypos);
+    }
+
     gtk_widget_show(widget);
 
     // Connect keyboard accelerators

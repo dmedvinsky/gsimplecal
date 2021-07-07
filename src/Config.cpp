@@ -63,6 +63,7 @@ void Config::setDefaults()
     mainwindow_sticky = false;
     mainwindow_skip_taskbar = true;
     mainwindow_position = GTK_WIN_POS_MOUSE;
+    mainwindow_gravity = GdkGravity(0);
     mainwindow_xoffset = 0;
     mainwindow_yoffset = 0;
     mark_today = true;
@@ -163,6 +164,14 @@ void Config::addOption(string var, string val)
             mainwindow_position = GTK_WIN_POS_CENTER;
         } else if (val == "mouse") {
             mainwindow_position = GTK_WIN_POS_MOUSE;
+        } else if (val == "topleft") {
+            mainwindow_gravity = GDK_GRAVITY_NORTH_WEST;
+        } else if (val == "topright") {
+            mainwindow_gravity = GDK_GRAVITY_NORTH_EAST;
+        } else if (val == "bottomleft") {
+            mainwindow_gravity = GDK_GRAVITY_SOUTH_WEST;
+        } else if (val == "bottomright") {
+            mainwindow_gravity = GDK_GRAVITY_SOUTH_EAST;
         } else {
             mainwindow_position = GTK_WIN_POS_NONE;
         }

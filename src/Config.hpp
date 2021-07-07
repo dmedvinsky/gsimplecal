@@ -37,6 +37,7 @@ public:
     bool mainwindow_sticky;
     bool mainwindow_skip_taskbar;
     bool mainwindow_resizable;
+    GdkGravity mainwindow_gravity;
     GtkWindowPosition mainwindow_position;
     int mainwindow_xoffset;
     int mainwindow_yoffset;
