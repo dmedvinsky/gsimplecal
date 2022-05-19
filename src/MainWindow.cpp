@@ -16,6 +16,14 @@ bool closeCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
     }
     return true;
 }
+bool runExternalViewerCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
+                               GdkModifierType mod, gpointer user_data)
+{
+    if (user_data) {
+        ((MainWindow*)user_data)->runExternalViewer();
+    }
+    return true;
+}
 bool nextYearCallback(GtkAccelGroup *group, GObject *obj, guint keyval,
                       GdkModifierType mod, gpointer user_data)
 {
@@ -138,6 +146,7 @@ MainWindow::MainWindow()
     GClosure *closure;
 
     Shortcut keys[] = {{GDK_KEY_Escape, 0, closeCallback},
+                       {GDK_KEY_Return, 0, runExternalViewerCallback},
                        {GDK_KEY_q, GDK_CONTROL_MASK, closeCallback},
                        {GDK_KEY_w, GDK_CONTROL_MASK, closeCallback},
                        {GDK_KEY_n, GDK_SHIFT_MASK, nextYearCallback},
@@ -190,6 +199,10 @@ void MainWindow::close()
     g_signal_emit_by_name(widget, "destroy");
 }
 
+void MainWindow::runExternalViewer()
+{
+    calendar->runExternalViewer();
+}
 void MainWindow::goToday()
 {
     calendar->goToday();
