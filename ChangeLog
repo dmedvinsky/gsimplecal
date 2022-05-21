@@ -1,3 +1,6 @@
+2022-05-21: v2.3:
++ Add missing keyboard shortcut to launch external viewer
+
 2021-02-17: v2.2:
 - Fix building when sysctl.h does not exist
 * Update clock each second if seconds are rendered
