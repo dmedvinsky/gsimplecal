@@ -18,6 +18,7 @@ public:
 
     void close();
 
+    void runExternalViewer();
     void nextMonth();
     void prevMonth();
     void nextYear();
