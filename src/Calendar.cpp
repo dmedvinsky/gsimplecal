@@ -170,12 +170,17 @@ bool Calendar::runExternalViewer()
         int year, month, day;
         gtk_calendar_get_date((GtkCalendar*)widget,
                               (guint*)&year, (guint*)&month, (guint*)&day);
-        struct tm date;
-        date.tm_year = year - 1900;
-        date.tm_mon = month;
-        date.tm_mday = day;
-        date.tm_sec = date.tm_min = date.tm_hour = date.tm_wday
-                    = date.tm_yday = date.tm_isdst = 0;
+        GDateTime* datetime = g_date_time_new_local(year, month, day, 0, 0, 0.0);
+
+        struct tm date = {
+            .tm_sec = 0, .tm_min = 0, .tm_hour = 0,
+            .tm_mday  = g_date_time_get_day_of_month(datetime),
+            .tm_mon   = g_date_time_get_month(datetime),
+            .tm_year  = g_date_time_get_year(datetime) - 1900,
+            .tm_wday  = (g_date_time_get_day_of_week(datetime)+2)%7,
+            .tm_yday  = g_date_time_get_day_of_year(datetime),
+            .tm_isdst = g_date_time_is_daylight_savings(datetime),
+        };
 
         size_t buf_size = len + 64;
         char* cmd = new char[buf_size];
