@@ -1,3 +1,6 @@
+2022-05-21: v2.4.1:
+- Fix build on gcc 4.6.4
+
 2022-05-21: v2.4:
 - Fix incomplete strftime input when launching external viewer
 
