@@ -185,7 +185,7 @@ bool Calendar::runExternalViewer()
         date.tm_yday  = g_date_time_get_day_of_year(datetime);
         date.tm_isdst = g_date_time_is_daylight_savings(datetime);
 
-        g_date_time_unref (datetime);
+        g_date_time_unref(datetime);
 
         size_t buf_size = len + 64;
         char* cmd = new char[buf_size];
