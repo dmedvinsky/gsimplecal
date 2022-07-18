@@ -170,17 +170,22 @@ bool Calendar::runExternalViewer()
         int year, month, day;
         gtk_calendar_get_date((GtkCalendar*)widget,
                               (guint*)&year, (guint*)&month, (guint*)&day);
-        GDateTime* datetime = g_date_time_new_local(year, month, day, 0, 0, 0.0);
 
-        struct tm date = {
-            .tm_sec = 0, .tm_min = 0, .tm_hour = 0,
-            .tm_mday  = g_date_time_get_day_of_month(datetime),
-            .tm_mon   = g_date_time_get_month(datetime),
-            .tm_year  = g_date_time_get_year(datetime) - 1900,
-            .tm_wday  = (g_date_time_get_day_of_week(datetime)+2)%7,
-            .tm_yday  = g_date_time_get_day_of_year(datetime),
-            .tm_isdst = g_date_time_is_daylight_savings(datetime),
-        };
+        // gtk_calendar_get_date returns 0-index month, but g_date_time_new_utc needs 1-indexed
+        GDateTime* datetime = g_date_time_new_utc(year, month+1, day, 0, 0, 0.0);
+
+        struct tm date;
+        date.tm_sec   = 0;
+        date.tm_min   = 0;
+        date.tm_hour  = 0;
+        date.tm_mday  = g_date_time_get_day_of_month(datetime);
+        date.tm_mon   = month;
+        date.tm_year  = g_date_time_get_year(datetime) - 1900;
+        date.tm_wday  = g_date_time_get_day_of_week(datetime) % 7;
+        date.tm_yday  = g_date_time_get_day_of_year(datetime);
+        date.tm_isdst = g_date_time_is_daylight_savings(datetime);
+
+        g_date_time_unref(datetime);
 
         size_t buf_size = len + 64;
         char* cmd = new char[buf_size];
