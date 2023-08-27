@@ -68,6 +68,7 @@ void Config::setDefaults()
     mark_today = true;
     show_week_numbers = false;
     close_on_unfocus = false;
+    close_on_mouseleave = false;
 }
 
 bool Config::findPath()
@@ -193,6 +194,10 @@ void Config::addOption(string var, string val)
     } else if (var == "close_on_unfocus") {
         if (!fromString<bool>(close_on_unfocus, val)) {
             close_on_unfocus = false;
+        }
+    } else if (var == "close_on_mouseleave") {
+        if (!fromString<bool>(close_on_mouseleave, val)) {
+            close_on_mouseleave = false;
         }
     } else if (var == "force_lang") {
         force_lang = val;

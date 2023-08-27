@@ -122,6 +122,11 @@ int main(int argc, char *argv[])
                          GCallback(gtk_widget_destroy),
                          main_window->getWindow());
     }
+    if (config->close_on_mouseleave) {
+        g_signal_connect(main_window->getWindow(), "leave-notify-event",
+                         GCallback(gtk_widget_destroy),
+                         main_window->getWindow());
+    }
 
     gtk_main();
 

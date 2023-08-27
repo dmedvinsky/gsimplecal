@@ -30,6 +30,7 @@ public:
     string external_viewer;
     bool show_week_numbers;
     bool close_on_unfocus;
+    bool close_on_mouseleave;
     string force_lang;
 
     bool mainwindow_decorated;
