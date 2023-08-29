@@ -37,6 +37,17 @@ static bool time_handler(GtkWidget *widget)
     return true;
 }
 
+static bool on_mouse_leave(GtkWidget *widget, GdkEventCrossing *event, gpointer user_data)
+{
+    GdkRectangle allocation;
+    gtk_widget_get_allocation(widget, &allocation);
+    if (event->x <= allocation.x || event->x >= allocation.x + allocation.width ||
+        event->y <= allocation.y || event->y >= allocation.y + allocation.height) {
+        gtk_widget_destroy(widget);
+    }
+    return true;
+}
+
 static void version()
 {
     std::cout << PACKAGE_STRING << std::endl;
@@ -120,6 +131,11 @@ int main(int argc, char *argv[])
     if (config->close_on_unfocus) {
         g_signal_connect(main_window->getWindow(), "focus-out-event",
                          GCallback(gtk_widget_destroy),
+                         main_window->getWindow());
+    }
+    if (config->close_on_mouseleave) {
+        g_signal_connect(main_window->getWindow(), "leave-notify-event",
+                         GCallback(on_mouse_leave),
                          main_window->getWindow());
     }
 
