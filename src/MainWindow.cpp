@@ -163,7 +163,7 @@ MainWindow::MainWindow()
         closure = g_cclosure_new(G_CALLBACK(keys[key].func), (gpointer)this, NULL);
         gtk_accel_group_connect(accelerators, keys[key].key,
                                 (GdkModifierType)keys[key].modifier,
-                                (GtkAccelFlags)NULL, closure);
+                                (GtkAccelFlags)0, closure);
         g_closure_unref(closure);
     }
 
