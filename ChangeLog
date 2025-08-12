@@ -1,3 +1,6 @@
+2023-09-23: v2.5.2:
+- Fixes for unique instance race conditions
+
 2023-09-23: v2.5.1:
 - Fix build on gcc
 

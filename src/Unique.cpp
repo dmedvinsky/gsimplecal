@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <signal.h>
 #include <sys/sem.h>
+#include <errno.h>
 
 #if HAVE_SYSCTL
 #include <sys/sysctl.h>
@@ -47,19 +48,32 @@ bool Unique::isRunning()
 
 void Unique::start()
 {
-    if (!isRunning()) {
-        // Create semaphore; fail if already exists.
-        int semid = semget(semaphore_key, 1, IPC_CREAT | IPC_EXCL | 0660);
-        if (semid == -1) {
+    int semid = semget(semaphore_key, 1, IPC_CREAT | IPC_EXCL | 0660);
+
+    if (semid == -1) {
+        if (errno == EEXIST) {
+            // A semaphore already exists, indicating another instance is running.
+            // Kill the existing instance.
+            kill(SIGTERM);
+            // After killing, we must wait for the old instance to terminate and clean up.
+            // A small sleep can help prevent race conditions.
+            sleep(1);
+            // Now, try to start again. If it still exists, there's a problem.
+            semid = semget(semaphore_key, 1, IPC_CREAT | IPC_EXCL | 0660);
+            if (semid == -1) {
+                 throw UniqueException("semget failed after killing existing instance");
+            }
+        } else {
+            // Handle other semget errors.
             throw UniqueException("semget failed while creating semaphore");
         }
+    }
 
-        // Perform an operation on semaphore so that semctl(GETPID) returns
-        // current PID.
-        struct sembuf ops = {0, 1, 0};
-        if (semop(semid, &ops, 1) == -1) {
-            throw UniqueException("semop failed");
-        }
+    // Perform an operation on semaphore so that semctl(GETPID) returns
+    // current PID.
+    struct sembuf ops = {0, 1, 0};
+    if (semop(semid, &ops, 1) == -1) {
+        throw UniqueException("semop failed");
     }
 }
 
@@ -73,21 +87,25 @@ void Unique::kill()
 }
 void Unique::kill(int signal_id)
 {
-    if (isRunning()) {
-        // Get semaphore; fail if not present.
-        int semid = semget(semaphore_key, 1, 0660);
-        if (semid == -1) {
-            throw UniqueException("semget failed while trying to kill");
-        }
+    // Get semaphore; fail if not present.
+    int semid = semget(semaphore_key, 1, 0660);
+    if (semid == -1) {
+        throw UniqueException("semget failed while trying to kill");
+    }
 
-        // Get the pid from semaphore value (stored before) to kill the process.
-        int pid = semctl(semid, 0, GETPID, 0);
-        if (pid <= 0) {
-            throw UniqueException("semctl(GETPID) failed");
+    // Get the pid from semaphore value (stored before) to kill the process.
+    int pid = semctl(semid, 0, GETPID, 0);
+    if (pid <= 0) {
+        throw UniqueException("semctl(GETPID) failed");
+    }
+
+    if (::kill(pid, signal_id) == -1) {
+        if (errno == ESRCH) {
+            // Process does not exist. This indicates a stale semaphore.
+            // Clean it up immediately.
+            semctl(semid, 0, IPC_RMID, 0);
         }
-        if (::kill(pid, signal_id)) {
-            throw UniqueException("kill failed");
-        }
+        throw UniqueException("kill failed");
     }
 }
 
