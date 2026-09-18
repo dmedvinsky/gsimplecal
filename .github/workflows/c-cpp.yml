@@ -11,11 +11,23 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - name: gtk3
+            configure-flags: ""
+          - name: gtk2
+            configure-flags: "--enable-gtk2"
+
     steps:
     - uses: actions/checkout@v4
+    - name: install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtk-3-dev libgtk2.0-dev
     - name: autogen
       run: ./autogen.sh
     - name: configure
-      run: ./configure
+      run: ./configure ${{ matrix.configure-flags }}
     - name: make
       run: make
