@@ -104,6 +104,7 @@ MainWindow::MainWindow()
     gint xpos, ypos;
     widget = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
+    gtk_widget_set_name(widget, "gsimplecal");
     gtk_window_set_title(GTK_WINDOW(widget), "gsimplecal");
     gtk_window_set_decorated(GTK_WINDOW(widget), config->mainwindow_decorated);
     gtk_window_set_position(GTK_WINDOW(widget), config->mainwindow_position);
