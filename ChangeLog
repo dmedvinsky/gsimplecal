@@ -1,3 +1,6 @@
+2026-10-12: v2.5.4:
+- Fix build on Hurd (PATH_MAX not defined)
+
 2026-09-18: v2.5.3:
 - Add `name` for main window via `gtk_widget_set_name`
 
