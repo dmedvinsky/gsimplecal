@@ -10,6 +10,10 @@
 #include <sys/sysctl.h>
 #endif
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
 #include <sys/types.h>
 
 #include "Unique.hpp"
